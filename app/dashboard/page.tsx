@@ -6,14 +6,20 @@ import MainContent from "../components/MainContent";
 
 export default function Dashboard(){
 
-    return <div className="flex min-h-screen bg-grey-300 flex-col">
-
+    return (
+    
+    <div>
         <Navbar></Navbar>
+    <div className="flex h-full bg-gray-300 flex-col mt-20">
+
+        
+  
+        
 
         <MainContent></MainContent>
 
         
         
         
-    </div>
+    </div> </div>)
 }
