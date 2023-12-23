@@ -8,7 +8,7 @@ export default function RegisterForm() {
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const [error, setError] = useState('a')
+    const [error, setError] = useState('')
 
 const router = useRouter()
 const handleSubmit = async (e) => {
@@ -57,22 +57,57 @@ catch{
 
 }
     }
-    return <div className="grid place-items-center h-screen text-slate-900">
-    <div className="shadow-lg p-5 rounded-lg border-t-4 border-green-400">
-        <h1 className="text-xl font-bold my-4">Register</h1>
-
-        <form onSubmit={handleSubmit} className="flex flex-col gap-3">
-            <input onChange={e => setName(e.target.value)}type="text" placeholder="Full Name"></input>
-            <input onChange={e => setEmail(e.target.value)} type="text" placeholder="email"></input>
-            <input onChange={e => setPassword(e.target.value)} type="password" placeholder="password"></input>
-            <button className="bg-green-600 text-white font-bold cursor-pointer px-6 py-2">Register </button>
-
-            { error &&(
-            <div className="bg-red-500 text-white w-fit text-sm py-1 px-3 rounded-md mt-2">
-        {error}
-            </div>)}
-    <Link className="text-sm mt-3 text-right" href={'/'}>Already have an account? <span className="underline">Login</span></Link>
-        </form>
+    return (
+        <div className="grid place-items-center h-screen bg-gradient-to-r from-violet-200 to-slate-300">
+        <div className="bg-white bg-opacity-90 p-10 rounded-3xl shadow-2xl border border-gray-100 transform transition duration-500 hover:scale-105">
+            <h1 className="text-4xl font-bold text-gray-800 text-center mb-8 animate-pulse">Sign Up</h1>
+            <form onSubmit={handleSubmit} className="space-y-6 h-96 w-96">
+                <div className="group relative">
+                    <input
+                        className="peer h-12 w-full border-b-4 border-gray-300 text-lg text-gray-900 placeholder-transparent focus:outline-none focus:border-indigo-700 transition-all"
+                        onChange={(e) => setName(e.target.value)}
+                        type="text"
+                        placeholder="username"
+                        required
+                    />
+                    <label className="absolute left-0 -top-4 pointer-events-none text-gray-600 text-lg ml-3 transition-all group-hover:text-indigo-700 peer-placeholder-shown:text-lg peer-placeholder-shown:text-gray-500 peer-placeholder-shown:top-3 peer-focus:-top-8 peer-focus:text-indigo-700">username</label>
+                </div>
+                <div className="group relative">
+                    <input
+                        className="peer h-12 mt-4 w-full border-b-4 border-gray-300 text-lg text-gray-900 placeholder-transparent focus:outline-none focus:border-indigo-700 transition-all"
+                        onChange={(e) => setEmail(e.target.value)}
+                        type="email"
+                        placeholder="Email"
+                        required
+                    />
+                    <label className="absolute mt-4 left-0 ml-3 -top-4 pointer-events-none text-gray-600 text-lg transition-all group-hover:text-indigo-700 peer-placeholder-shown:text-lg peer-placeholder-shown:text-gray-500 peer-placeholder-shown:top-3 peer-focus:-top-8 peer-focus:text-indigo-700">Email</label>
+                </div>
+                <div className="group relative">
+                    <input
+                        className="peer h-12 mt-4 w-full border-b-4 border-gray-300 text-lg text-gray-900 placeholder-transparent focus:outline-none focus:border-indigo-700 transition-all"
+                        onChange={(e) => setPassword(e.target.value)}
+                        type="password"
+                        placeholder="Password"
+                        required
+                    />
+                    <label className="absolute mt-4 left-0 ml-3 -top-4 pointer-events-none text-gray-600 text-lg transition-all group-hover:text-indigo-700 peer-placeholder-shown:text-lg peer-placeholder-shown:text-gray-500 peer-placeholder-shown:top-3 peer-focus:-top-8 peer-focus:text-indigo-700">Password</label>
+                </div>
+                <button className="w-full py-3 text-xl text-white bg-gradient-to-r from-slate-800 to-slate-700 hover:from-slate-700 hover:to-slate-600 rounded-lg transition duration-300 ease-in-out hover:scale-105 shadow-lg">
+                    Register
+                </button>
+                {error && (
+                    <div className="text-center text-red-500 mt-2 animate-pulse">
+                        {error}
+                    </div>
+                )}
+                <Link href="/">
+                    <p className="text-lg mt-6 text-center text-gray-700 hover:text-gray-900 block transition duration-300 ease-in-out hover:underline">
+                        Already have an account? <span className="font-medium">Login</span>
+                    </p>
+                </Link>
+            </form>
+        </div>
     </div>
-</div>
-}
+    
+      );
+    }

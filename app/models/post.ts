@@ -12,7 +12,23 @@ const postSchema = new Schema({
     filename: {
         type: String,
         required: false
-    }
+    },
+    likedBy:[
+        {
+            type: String
+        }
+    ],
+    likes: {
+        type: Number, 
+        default: 0
+    },
+    comments: [
+        {
+            user: String,
+            text: String
+        }
+    ]
+
 }, {timestamps: true})
 
 const Post = models.Post || mongoose.model("Post", postSchema)

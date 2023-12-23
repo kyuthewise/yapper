@@ -7,10 +7,11 @@ import { useState, useEffect } from "react";
 import UserList from "./userList";
 
 
-const UserInfo = () => {
+const UserInfo = ({userid, currentUserId}) => {
 const {data:session} = useSession()
 const [userId, setUserId] = useState('')
-  const userid = session?.user?.name
+const currentUserid = userid || session?.user?.name;
+  
     const sendMessage = async (e) => {
       e.preventDefault()
       socket.emit('chat message', message); 
@@ -36,8 +37,7 @@ const [userId, setUserId] = useState('')
 
   return(
   <div className="bg-white h-5/6 fixed left-0 w-96 mt-10 mb-10 rounded-lg ml-10 ">
-    <UserList></UserList>
-    <Comp></Comp>
+    <Comp userid={currentUserid} currentUserId={currentUserId}></Comp>
   </div>
     
   )

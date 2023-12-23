@@ -18,6 +18,7 @@ mongoose.connect('mongodb+srv://kyujook:redert77@cluster0.kzjq4e6.mongodb.net/?r
 
 const server = http.createServer(app);
 const connectedUsers = [];
+const users = {}
 
 const io = socketIO(server, {
   cors:{
@@ -27,9 +28,13 @@ const io = socketIO(server, {
 });
 io.on('connection', async (socket) => {
 
+  console.log(connectedUsers)
 
-
-
+socket.on('login', (userid) => {
+  console.log(userid)
+  users[userid] = socket.id
+  console.log(users)
+})
 
   socket.on('clientMessage', (data) => {
 
@@ -38,13 +43,20 @@ io.on('connection', async (socket) => {
       socketId: socket.id
     }
     connectedUsers.push(user)
+    
     io.emit('serverMessage', { message: 'Message received on the server', data });
   });
 
   io.emit('updateUserList', connectedUsers);
   // Handle chat events
-  socket.on('chat message', (msg) => {
-    io.emit('chat message', msg); // Broadcast the message to all connected clients
+  socket.on('chat message', (msg, userid, selectedUser) => {
+
+    const msge = {
+      message: msg,
+      userid: userid,
+      selectedUser: selectedUser
+    }
+    io.emit('chat message', msge); // Broadcast the message to all connected clients
   });
 
   socket.on('disconnect', () => {

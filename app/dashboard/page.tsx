@@ -11,12 +11,7 @@ export default function Dashboard(){
     <div>
         <Navbar></Navbar>
     <div className="flex h-full bg-gray-300 flex-col mt-20">
-
-        
-  
-        
-
-        <MainContent></MainContent>
+<MainContent></MainContent>
 
         
         

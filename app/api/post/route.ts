@@ -33,7 +33,8 @@ export async function POST (req, res) {
           );
         }
         else{
-            await Post.create({user, message})
+            const newPost = await Post.create({user, message})
+            console.log(newPost);
         }
         return NextResponse.json({message: "Post published"}, {status: 201})
     }
@@ -41,4 +42,19 @@ export async function POST (req, res) {
         console.log("Error occured ", error)
         return NextResponse.json({message: "Error publishing post"}, {status: 500})
     }
+}
+
+export async function DELETE(req, res) {
+    const { searchParams} = new URL(req.url);
+    const postid = searchParams.get('postid')
+    try{
+    await connectMongoDB()
+    const postDelete = await Post.deleteOne({_id:postid})
+    
+    return NextResponse.json({message: "Post deleted"}, {status: 201})
+    }
+    catch{
+
+    }
+    return NextResponse.json({message: "sum error"}, {status: 500})
 }

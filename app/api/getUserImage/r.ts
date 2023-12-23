@@ -2,7 +2,6 @@ import { connectMongoDB } from "@/app/lib/server";
 import User from "@/app/models/user";
 import NextAuth from "next-auth/next";
 import CredentialsProvider from "next-auth/providers/credentials";
-import { SessionContext } from "next-auth/react";
 import bcrypt from 'bcryptjs'
 import GoogleProvider from "next-auth/providers/google";
 
@@ -47,35 +46,7 @@ console.log("error: ", error)
     pages: {
         signIn: "/"
     },
-    callbacks: {
-        async signIn({ user, account, credentials }) {
-            await connectMongoDB(); // Ensure database connection
-
-            if (account.provider === 'google') {
-                // Google Provider logic
-                let existingUser = await User.findOne({ email: user.email });
-
-                if (!existingUser) {
-                    existingUser = await User.create({
-                        name: user.name,
-                        email: user.email,
-                        image: user.image,
-                        // Add other fields as necessary
-                    });
-                }
-                return true; // Successful Google sign-in
-            } else {
-                // Credentials Provider logic
-                const foundUser = await User.findOne({ name: credentials.name });
-                if (!foundUser) return false; // User not found
-
-                const passwordMatch = await bcrypt.compare(credentials.password, foundUser.password);
-                return passwordMatch; // Return true if password matches, false otherwise
-            }
-        },
-        // ... other callbacks
-    },
-};
+}
 
 const handler = NextAuth(authOptions);
 

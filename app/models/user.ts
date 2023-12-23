@@ -17,10 +17,33 @@ const userSchema = new Schema({
     image: {
         type: String,
         required: false
+    },
+    info: {
+    Job: {
+        type: String,
+        required: false
+    },
+    Hobbies: {
+        type: String,
+        required: false
+    }, 
+    Education: {
+    type: String,
+    required: false
+    },
+    Location: {
+        type: String,
+        required: false
+    },
+    Aboutme:{
+        type: String,   
+        required: false
     }
+    },
+    friends: [String]
     
 }, {timestamps: true})
 
-
 const User = models.User || mongoose.model("User", userSchema);
+
 export default User;
