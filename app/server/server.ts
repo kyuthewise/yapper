@@ -26,6 +26,7 @@ const io = socketIO(server, {
     methods: ["GET", "POST"]
   }
 });
+
 io.on('connection', async (socket) => {
 
 
