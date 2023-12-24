@@ -40,7 +40,7 @@
     "server/server.ts",
     "app/server/server.ts",
     "app/components/pusher.tsx",
-    "app/components/UserInfo.tsx"
+    "app/components/UserInfo/UserInfoLayout.tsx"
   ],
   "exclude": [
     "node_modules"

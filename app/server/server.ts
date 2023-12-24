@@ -28,12 +28,12 @@ const io = socketIO(server, {
 });
 io.on('connection', async (socket) => {
 
-  console.log(connectedUsers)
+
 
 socket.on('login', (userid) => {
-  console.log(userid)
+
   users[userid] = socket.id
-  console.log(users)
+
 })
 
   socket.on('clientMessage', (data) => {

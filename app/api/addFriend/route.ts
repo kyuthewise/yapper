@@ -11,18 +11,25 @@ const {userid, adduserid} = await req.json()
 
 console.log(userid, adduserid)
     try{
-    connectMongoDB()
-if(userid != adduserid){
-    const user = await User.findOne({name: userid})
-    if(!user.friends.includes(adduserid)){
+    await connectMongoDB()
 
+if(userid != adduserid){
+    const user = await User.findOne({name:userid})
+    console.log('nice')
+    console.log(user)
+    if(!user.friends.includes(adduserid)){
+        console.log('nice')
         user.friends.push(adduserid)
+        console.log('nice')
+        console.log(user)
+        user.markModified('friends');
         await user.save()
+        console.log('nice')
+        console.log('nice')
         return NextResponse.json({message: "User added successfuly"}, {status: 201})
 
     }
-    user.friends = user.friends.filter(id => id !== adduserid)
-    await user.save()
+    user.friends = user.friends.filter(id => id != userid)
     return NextResponse.json({message: "user unadded"}, {status: 201})
 
 }

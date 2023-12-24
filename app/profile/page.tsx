@@ -1,13 +1,13 @@
 "use client";
 
-import Navbar from "../components/Navbar";
+import Navbar from "../components/Layout/Navbar";
 import { useRouter } from 'next/navigation';
-import UserInfo from "../components/UserInfo";
+import UserInfo from "../components/UserInfo/UserInfoLayout";
 import { useSearchParams } from "next/navigation";
-import Comp from "../components/comp";
+import Comp from "../components/UserInfo/UserDetails";
 import UserList from "../components/userList";
-import GetPosts from "../components/getPosts";
-import Feed from "../components/Feed";
+import GetPosts from "../components/Feed/FeedPosts";
+import Feed from "../components/Feed/Feed";
 import { useSession } from "next-auth/react";
 
 export default function Profile(){
