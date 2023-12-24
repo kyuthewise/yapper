@@ -10,7 +10,7 @@ const Feed = () => {
       };
 
     return(
-        <div className="h-full w-5/12 mt-10 absolute rounded-lg">
+        <div className="h-full w-5/12 mt-10 absolute rounded-lg ">
             <CreatePost onDataChange={handleDataChange} />
             <GetPosts sharedData={sharedData}/>
         </div>
