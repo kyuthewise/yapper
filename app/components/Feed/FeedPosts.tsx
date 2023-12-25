@@ -89,8 +89,8 @@ try{
     }
       
     fetchData();
-  }, [likeTrigger, sharedData]);
-  
+  }, [likeTrigger, sharedData, userid]);
+
   
   useEffect(() => {
     const initialStates = {};
