@@ -5,16 +5,17 @@ const path = require('path');
 const cors = require('cors')
 const multer = require('multer');
 const mongoose = require('mongoose')
+require('dotenv').config();
 
 const app = express();
 app.use(cors({
   credentials: true,
-  origin: 'https://yapper.onrender.com'
+  origin: process.env.NEXTAUTH_URL
 }));
 
-app.options('*', cors());
+app.options('*', cors()); 
 
-mongoose.connect('mongodb+srv://kyujook:redert77@cluster0.kzjq4e6.mongodb.net/?retryWrites=true&w=majority');
+mongoose.connect(process.env.MongoDB_URL);
 
 const server = http.createServer(app);
 const connectedUsers = [];
@@ -22,7 +23,7 @@ const users = {}
 
 const io = socketIO(server, {
   cors:{
-    origin: "https://yapper.onrender.com",
+    origin: process.env.NEXTAUTH_URL,
     methods: ["GET", "POST"]
   }
 });

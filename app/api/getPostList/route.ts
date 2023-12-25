@@ -7,7 +7,7 @@ import { NextResponse } from "next/server";
 
 
 
-export const GET = async(req,res) => {
+export async function GET(req,res){
   console.log('getpostlist: bef try')
     try {
       console.log('getpostlist: af try')
