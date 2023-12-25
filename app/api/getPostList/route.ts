@@ -4,22 +4,28 @@ import Post from "@/app/models/post";
 import { NextApiRequest, NextApiResponse } from "next";
 
 import { NextResponse } from "next/server";
+import { useSearchParams } from "next/navigation";
 
 
 
-export async function GET(req,res){
+export async function GET(req ,res){
+  
   console.log('getpostlist: bef try')
     try {
+      const { searchParams} = new URL(req.url);
+      const userid = searchParams.get('userid')
       console.log('getpostlist: af try')
       await connectMongoDB()
+
         const posts = await Post.find()
         console.log('getpostlist: af c')
+        console.log(posts)
         return NextResponse.json({
             items: posts
         })
 
       } catch (error) {
-        return new NextResponse("no post list", { status: 500 });
+        return NextResponse.json("no post list", { status: 500 });
     
       }
 }

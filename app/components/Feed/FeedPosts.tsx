@@ -71,8 +71,10 @@ try{
   useEffect(() => {
 
     const fetchData = async () => {
+      if(userid){
       try {
-        const response = await axios.get('/api/getPostList');
+        const response = await axios.get('/api/getPostList', {
+          params: {userid} });
         console.log('postlist items', response.data.items)
         setPostList(response.data.items);
         
@@ -80,13 +82,16 @@ try{
       } catch (error) {
         console.log('error fetching postlist', error);
       }
-    };
-
-
-
+    }
+  else{
+    console.log('nouser')
+  }
+    }
       
     fetchData();
   }, [likeTrigger, sharedData]);
+  
+  
   useEffect(() => {
     const initialStates = {};
     postList.forEach((post) => {
