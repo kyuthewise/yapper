@@ -103,13 +103,16 @@ setIsEditMode(false)
           console.error('Error uploading image:', error);
         }
       };
+        console.log(profileImage)
       return (
         <div className="bg-gray-50 rounded-lg w-full max-w-sm p-5 flex flex-col justify-center items-center shadow-lg">
+          
           <div className="flex flex-col items-center">
+            
             <label className="relative rounded-full h-32 w-32 cursor-pointer overflow-hidden mb-4">
               <img
                 key={imgurl}
-                src={profileImage && profileImage.includes('https://lh3.googleusercontent.com') ? profileImage : (profileImage ? imgurl : `/uploads/defaultimg.svg`)}
+                src={profileImage ? profileImage : `/uploads/defaultimg.svg`}
                 alt="Profile"
                 className="object-cover w-full h-full"
               />
@@ -132,7 +135,7 @@ setIsEditMode(false)
           </div>
     
           <div className="text-2xl font-semibold mb-4">{userid}</div>
-    
+              
           <div className="w-full">
             {isEditMode ? (
               <div className="space-y-4">

@@ -72,7 +72,7 @@ return (
                 <div className="flex items-center">
                   <img
                     className="h-12 w-12 object-cover rounded-full mr-4"
-                    src={user.image && user.image.includes('https://lh3.googleusercontent.com') ? user.image : (user.image ? imageurl + user.image : imageurl + `defaultimg.svg`)}
+                    src={user.image  ? user.image : `defaultimg.svg`}
                     alt="Profile"
                   />
                   <p className="text-lg font-medium">{user.name}</p>
