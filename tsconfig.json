@@ -38,7 +38,7 @@
     "app/api/register/route.ts",
     "app/Providers.tsx",
     "server/server.ts",
-    "app/server/server.ts",
+    "server/server.ts",
     "app/components/pusher.tsx",
     "app/components/UserInfo/UserInfoLayout.tsx"
   ],

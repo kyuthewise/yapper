@@ -9,7 +9,7 @@ const mongoose = require('mongoose')
 const app = express();
 app.use(cors({
   credentials: true,
-  origin: 'http://localhost:3000'
+  origin: 'https://yapper.onrender.com
 }));
 
 app.options('*', cors());
@@ -22,7 +22,7 @@ const users = {}
 
 const io = socketIO(server, {
   cors:{
-    origin: "http://localhost:3000",
+    origin: "https://yapper.onrender.com",
     methods: ["GET", "POST"]
   }
 });

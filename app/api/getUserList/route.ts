@@ -18,7 +18,7 @@ export const GET = async(req: Request) => {
         // Send a simple response
         return new NextResponse("User list retrieved", { status: 200 });
       } catch (error) {
-        console.error('Error:', error);
+        return new NextResponse("User list retrieved", { status: 500 });
     
       }
 }
