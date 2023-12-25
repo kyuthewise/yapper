@@ -170,7 +170,7 @@ const handlePostClick = async (userid) =>{
 router.push(`/profile?userid=${userid}`);
 
 }
-const defaultimg = 'defaultimg.svg'
+
 
 useEffect(() =>{
   if(selectedUser){
@@ -206,7 +206,7 @@ const formatDate = (dateString) => {
                           <div className="flex items-center">
                             <img
                               alt="Profile" 
-                              src={user.image && user.image.includes('https://lh3.googleusercontent.com') ? user.image : `${imageurl}/${user.image || defaultimg}`}
+                              src={user.image ? user.image : `/uploads/defaultimg.svg`}
                               className="object-cover w-10 h-10 rounded-full mr-3 cursor-pointer"
                               onClick={() => handlePostClick(post.user)}
                             />

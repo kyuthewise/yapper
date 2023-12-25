@@ -116,7 +116,7 @@ return openChat ? (
     <div className="fixed bottom-0 right-0 mb-4 mr-4 w-96 bg-white rounded-lg shadow-lg flex flex-col ">
       <div className="flex items-center justify-between p-3 border-b border-gray-200">
         <div className="flex items-center">
-          <img className="w-10 h-10 object-cover rounded-full mr-3" src={userPfp && userPfp.includes('https://lh3.googleusercontent.com') ? userPfp : userPfp ? imgurl + userPfp : imgurl + `defaultimg.svg`}  alt={selectedUser} />
+          <img className="w-10 h-10 object-cover rounded-full mr-3" src={userPfp ? userPfp : `uploads/defaultimg.svg`}  alt={selectedUser} />
           <p className="text-lg font-medium">{selectedUser}</p>
         </div>
         <button className="text-gray-600 hover:text-gray-800" onClick={handleCloseChat}>&times;</button>
