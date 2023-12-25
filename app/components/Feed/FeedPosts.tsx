@@ -56,6 +56,9 @@ try{
     const fetchData = async () => {
       try {
         const response = await axios.get('/api/getUserList');
+
+        console.log('userlist items', response.data.items)
+
         setUserList(response.data.items);
       } catch (error) {
         console.log('error fetching userlist', error);
@@ -70,6 +73,7 @@ try{
     const fetchData = async () => {
       try {
         const response = await axios.get('/api/getPostList');
+        console.log('postlist items', response.data.items)
         setPostList(response.data.items);
         
      

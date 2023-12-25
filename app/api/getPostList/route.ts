@@ -8,11 +8,12 @@ import { NextResponse } from "next/server";
 
 
 export const GET = async(req,res) => {
+  console.log('getpostlist: bef try')
     try {
-
+      console.log('getpostlist: af try')
       await connectMongoDB()
         const posts = await Post.find()
-      
+        console.log('getpostlist: af c')
         return NextResponse.json({
             items: posts
         })
