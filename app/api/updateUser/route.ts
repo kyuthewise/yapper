@@ -1,5 +1,5 @@
 import { connectMongoDB } from "@/app/lib/server";
-
+import { NextResponse } from "next/server";
 import User from "@/app/models/user";
 
 const updateUsersWithDefaultPicture = async () => {
@@ -23,6 +23,7 @@ const updateUsersWithDefaultPicture = async () => {
   } catch (error) {
     console.error('Error updating profile pictures:', error);
   }
+  return new NextResponse("Post list retrieved", { status: 200 });
 };
 
 // Call the function to update users
