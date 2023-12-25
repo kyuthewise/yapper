@@ -15,7 +15,7 @@ app.use(cors({
 
 app.options('*', cors()); 
 
-mongoose.connect(process.env.MongoDB_URL);
+mongoose.connect(process.env.MONGODB_URL);
 
 const server = http.createServer(app);
 const connectedUsers = [];
