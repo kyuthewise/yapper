@@ -9,7 +9,7 @@ const mongoose = require('mongoose')
 const app = express();
 app.use(cors({
   credentials: true,
-  origin: 'https://yapper.onrender.com
+  origin: 'https://yapper.onrender.com'
 }));
 
 app.options('*', cors());
