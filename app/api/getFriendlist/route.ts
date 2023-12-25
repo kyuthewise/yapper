@@ -15,7 +15,7 @@ try {
         const userid = searchParams.get('userid')
 
         if(userid != null){
-        connectMongoDB()
+        await connectMongoDB()
 
        const user = await User.findOne({name: userid})
        

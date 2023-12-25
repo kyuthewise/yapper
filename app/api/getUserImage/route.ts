@@ -11,7 +11,7 @@ export const GET = async(req, res) => {
         const { searchParams} = new URL(req.url);
         const userid = searchParams.get('userid')
         // Perform some logic or fetch data here
-        connectMongoDB()
+        await connectMongoDB()
         const user = await User.findOne({name: userid}).exec()
         if(user){
             return NextResponse.json({

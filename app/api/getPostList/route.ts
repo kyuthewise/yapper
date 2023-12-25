@@ -10,7 +10,7 @@ import { NextResponse } from "next/server";
 export const GET = async(req: Request) => {
     try {
 
-        connectMongoDB()
+      await connectMongoDB()
         const posts = await Post.find()
       
         return NextResponse.json({

@@ -9,7 +9,7 @@ import { NextResponse } from "next/server";
 export const GET = async(req: Request) => {
     try {
 
-        connectMongoDB()
+      await connectMongoDB()
         const users = await User.find().select('name image')
       
         return NextResponse.json({

@@ -9,7 +9,7 @@ export async function POST(req, res){
     const {postid, userid, comment} = await req.json()
     const comments = []
     try{
-    connectMongoDB()
+        await connectMongoDB()
     const post = await Post.findById(postid)
     const sendComment = {
         user: userid,
