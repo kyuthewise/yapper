@@ -7,7 +7,7 @@ import { NextResponse } from "next/server";
 
 
 
-export const GET = async(req: Request) => {
+export const GET = async(req,res) => {
     try {
 
       await connectMongoDB()
@@ -16,10 +16,9 @@ export const GET = async(req: Request) => {
         return NextResponse.json({
             items: posts
         })
-        // Send a simple response
-        return new NextResponse("Post list retrieved", { status: 200 });
+
       } catch (error) {
-        return new NextResponse("Post list retrieved", { status: 500 });
+        return new NextResponse("no post list", { status: 500 });
     
       }
 }

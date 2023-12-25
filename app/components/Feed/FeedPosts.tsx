@@ -65,14 +65,13 @@ try{
     fetchData();
   }, []);
 
-  console.log(postList)
   useEffect(() => {
 
     const fetchData = async () => {
       try {
         const response = await axios.get('/api/getPostList');
         setPostList(response.data.items);
-        console.log(response.data.items)
+        
      
       } catch (error) {
         console.log('error fetching postlist', error);
