@@ -18,7 +18,7 @@ const [openChat, setOpenChat] = useState(true)
 const messagesContainerRef = useRef(null); 
 
 useEffect(() => {
-    const socket = io('http://localhost:3001');
+    const socket = io('https://yapperserver.onrender.com');
     const audio = new Audio('/audio/bubblepop.wav')
     
     audio.volume = 0.2

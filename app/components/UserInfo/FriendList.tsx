@@ -41,7 +41,7 @@ fetchData()
 }, [userid])
 
 useEffect(() => {
-    const socket = io('http://localhost:3001');
+    const socket = io('https://yapperserver.onrender.com');
     socket.emit('login', userid);
     const audio = new Audio('/audio/bubblepop.wav')
       
