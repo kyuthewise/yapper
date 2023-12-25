@@ -5,7 +5,7 @@ import { getServerSession } from "next-auth";
 import User from "@/app/models/user";
 import { redirect } from "next/navigation"
 import { useSearchParams } from "next/navigation";
-export async function POST(req: any){
+export async function POST(req,res){
     try{
     const{userid, recieverId, message} = await req.json();
     await connectMongoDB()

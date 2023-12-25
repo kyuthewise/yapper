@@ -6,7 +6,7 @@ import { NextResponse } from "next/server";
 
 
 
-export const GET = async(req: Request) => {
+export const GET = async(req, res) => {
     try {
         const { searchParams} = new URL(req.url);
         const userid = searchParams.get('userid')
@@ -21,7 +21,8 @@ export const GET = async(req: Request) => {
         // Send a simple response
         return new NextResponse("NICE", { status: 200 });
       } catch (error) {
-        console.error('Error:', error);
+
+        return new NextResponse("image not retrieved", { status: 500 });
     
       }
 }

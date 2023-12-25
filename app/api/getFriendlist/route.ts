@@ -8,7 +8,7 @@ import { NextResponse } from "next/server";
 
 
 
-export const GET = async(req: Request) => {
+export const GET = async(req, res) => {
     
 try {
         const { searchParams} = new URL(req.url);

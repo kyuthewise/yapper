@@ -76,7 +76,7 @@ export default function LoginForm() {
     className="mt-4 w-full py-3 text-xl text-white bg-black hover:bg-red-900 rounded-lg transition duration-300 ease-in-out hover:scale-105 shadow-lg flex items-center justify-center gap-2"
 >
     <img className="w-6 h-6" src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google logo" />
-    <span>Login with Google</span>
+    <p>Login with Google&apos;</p>
 </button>
 
 
@@ -87,7 +87,7 @@ export default function LoginForm() {
                 )}
                 <Link href="/register">
                     <p className="text-lg mt-6 text-center text-gray-700 hover:text-indigo-800 block transition duration-300 ease-in-out hover:underline">
-                        Don't have an account? <span className="font-medium">Register</span>
+                        Don't have an account? <p className="font-medium">Register</p>
                     </p>
                 </Link>
             </form>
