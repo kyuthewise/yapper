@@ -42,7 +42,7 @@ export default function Comp({userid, currentUserId}){
         try {
           const userInfoResponse = await axios.get('/api/getUserInfo', { params: { userid } });
           const userImageResponse = await axios.get('/api/getUserImage', { params: { userid } });
-  
+          console.log('userimgrs ', userImageResponse)
           setUserInfo(userInfoResponse.data.userInfo || {
             Hobbies: '',
             Education: '',
@@ -93,6 +93,7 @@ setIsEditMode(false)
           const formData = new FormData();
           formData.append('image', image);
           formData.append('userid', userid);
+          console.log('image: ', image)
           // Assume '/api/upload' is your server endpoint for image upload
           const response = await axios.post(`/api/fileUpload`, formData)
           setImage('')

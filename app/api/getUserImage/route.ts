@@ -19,10 +19,10 @@ export const GET = async(req, res) => {
             })
         }
         // Send a simple response
-        return new NextResponse("NICE", { status: 200 });
+        return NextResponse.json("NICE", { status: 200 });
       } catch (error) {
 
-        return new NextResponse("image not retrieved", { status: 500 });
+        return NextResponse.json("image not retrieved", { status: 500 });
     
       }
 }
