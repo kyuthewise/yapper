@@ -24,7 +24,7 @@ const [postStates, setPostStates] = useState({});
 
  const userid = session?.user?.name
 
-
+console.log(sharedData)
 
   const handleLike = async (postid) => {
 

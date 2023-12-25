@@ -6,7 +6,7 @@ const CreatePost = ({ onDataChange }) => {
   const [message, setMessage] = useState('')
   const { data: session } = useSession();
   const [file, setFile] = useState(null)
-
+  const[number, setNumber] = useState(0)
   const handleFile = async (e) => {
     const image = e.target.files[0]
     setFile(image)
@@ -15,7 +15,7 @@ const CreatePost = ({ onDataChange }) => {
   const user = session?.user?.name
   const handleSubmit = async (e) => {
     e.preventDefault()
-    onDataChange(message)
+   
 
     try {
       const formData = new FormData()
@@ -26,6 +26,7 @@ const CreatePost = ({ onDataChange }) => {
       formData.append('message', message)
 
       const res = await axios.post('/api/updatePost', formData)
+      onDataChange(message)
       setMessage('')
       setFile(null)
     } catch (error) {
