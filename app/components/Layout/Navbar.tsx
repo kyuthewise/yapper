@@ -88,7 +88,7 @@ const Navbar = () => {
               onChange={handleSearchChange}
             />
           </div>
-          {searchResults.length > 0 && (
+          {searchResults && searchResults.length > 0 && (
             <div className="absolute top-full left-0 right-0 bg-white shadow-md mt-1 rounded z-10">
               {searchResults.map((user) => (
                 <div key={user._id} className="p-2 hover:bg-gray-100 flex justify-between items-center">

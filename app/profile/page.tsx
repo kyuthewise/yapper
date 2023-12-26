@@ -23,9 +23,9 @@ export default function Profile(){
         <Navbar></Navbar>
        
 
-    <div className="flex flex-row justify-center">
+    <div className="flex flex-row justify-center dark:bg-gray-800 mt-20 ">
 
- <div className="mt-10">
+ <div className="">
      <UserInfo userid={userid} currentUserId={currentUserId}/>
      </div>
      <div className="w-2/6 mt-10">

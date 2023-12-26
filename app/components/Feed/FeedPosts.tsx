@@ -216,7 +216,7 @@ const formatDate = (dateString) => {
                             <button className="text-indigo-500 hover:text-indigo-600" onClick={() => handleAddFriend(user.name)}><img className="h-6 w-6 dark:invert"src="/icons/addfriend.svg"/></button>
                           )}
                           {userid === post.user && (
-                            <button className="text-red-500 hover:text-red-600" onClick={() => handleDelete(post._id)}><img className="h-6 w-6 dark:invert" src="/icons/delete.svg"/></button>
+                            <button className="text-red-500 hover:text-red-600" onClick={() => handleDelete(post._id)}><img className="h-6 w-6 dark:invert dark:contrast-50" src="/icons/delete.svg"/></button>
                           )}
                         </div>
                         <p className="text-sm text-gray-500">{formatDate(post.createdAt)}</p>
