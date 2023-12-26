@@ -73,6 +73,7 @@ return (
                   <img
                     className="h-12 w-12 object-cover rounded-full mr-4 "
                     src={user.image  ? user.image : `/uploads/defaultimg.svg`}
+                    
                     alt="Profile"
                   />
                   <p className="text-lg font-medium">{user.name}</p>

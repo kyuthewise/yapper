@@ -6,7 +6,8 @@ import { NextResponse } from "next/server";
 export async function GET(req, res) {
 
         try {
-            await connectMongoDB(); const { searchParams} = new URL(req.url);
+            await connectMongoDB(); 
+            const { searchParams} = new URL(req.url);
             const term = searchParams.get('term')
 
             // Search logic - adjust according to needs
@@ -16,10 +17,10 @@ export async function GET(req, res) {
        
                 
          
-            return NextResponse.json({users})
+            return NextResponse.json({users}, {status: 201})
      
         } catch (error) {
-            return NextResponse.json({message: 'User not found'});
+            return NextResponse.json({message: 'user not found'}, {status: 404})
             }
         }
 

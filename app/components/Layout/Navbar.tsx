@@ -40,6 +40,7 @@ console.log('search results', searchResults)
     const term = e.target.value;
     setSearchTerm(term);
     debouncedSearch(term);
+    console.log('term:',term)
   };
 
   const handleAddFriend = async (addUserId) => {
