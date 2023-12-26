@@ -53,7 +53,7 @@ try{
     }
     }
 
-    console.log('user list',userList)
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -69,8 +69,9 @@ try{
     };
 
     fetchData();
-  }, []);
+  }, [userid, sharedData]);
 
+  console.log('user list',userList)
   useEffect(() => {
 
     const fetchData = async () => {
