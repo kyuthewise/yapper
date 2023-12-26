@@ -16,7 +16,8 @@ const userSchema = new Schema({
     },
     image: {
         type: String,
-        required: false
+        required: false,
+        default: '/uploads/defaultimg.svg'
     },
     info: {
     Job: {
