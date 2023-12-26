@@ -77,7 +77,8 @@ try{
       try {
         const response = await axios.get('/api/getPostList', {
           params: {userid} });
-   
+        
+          console.log(response.data.items)
         setPostList(response.data.items);
         
      
@@ -142,6 +143,7 @@ try{
   )
 
   setLikeTrigger(!likeTrigger)
+  console.log('ltr')
 }
 
 catch(error){
@@ -190,7 +192,7 @@ const toggleCommentVisibility = (postId) => {
 
 const formatDate = (dateString) => {
   const date = parseISO(dateString);
-  return format(date, 'PPp'); // Example format: June 23, 2020, 11:30 PM
+  return format(date, 'PPp'); 
 };
 
 const showPopup = (message) => {
@@ -240,7 +242,7 @@ const hidePopup = () => {
                         {post.filename && (
                       <div className="my-4">
                         <img 
-                          src={posturl + post.filename}
+                          src={post.filename}
                           alt="Post"
                           className="w-full h-160 object-cover rounded-lg shadow"
   

@@ -4,8 +4,14 @@ import { connectMongoDB } from "@/app/lib/server"
 import Post from "@/app/models/post";
 import path from "path";
 import { writeFile } from "fs/promises";
+import { Storage } from '@google-cloud/storage';
 
 export async function POST (req, res) {
+
+    const storage = new Storage({
+        keyFilename: process.env.GOOGLE_APPLICATION_CREDENTIALS, // Path to your service account key file
+      });
+      const bucket = storage.bucket(process.env.GCLOUD_STORAGE_BUCKET); 
 
     const formData = await req.formData();
         const file = formData.get("file")
@@ -13,6 +19,7 @@ export async function POST (req, res) {
         const message = formData.get("message")
 
 
+        
 
     try{
     
@@ -20,18 +27,38 @@ export async function POST (req, res) {
 
         console.log(file)
         await connectMongoDB()
-        if(file != null){
-        
-  const buffer = Buffer.from(await file.arrayBuffer());
-  const filename = Date.now() + file.name.replaceAll(" ", "_");   
-        await Post.create({user, message, filename})
 
-        await writeFile(
-            path.join(process.cwd(), "public/post/" + filename),
-            buffer
-      
-          );
-        }
+        if(file != null){
+            
+            const buffer = Buffer.from(await file.arrayBuffer());
+            const filename = `${Date.now()}-${file.name.replaceAll(" ", "_")}`;
+            const blob = bucket.file(filename);
+          
+            const uploadPromise = new Promise((resolve, reject) => {
+              const blobStream = blob.createWriteStream({ resumable: false });
+          
+              blobStream.on('error', err => {
+                console.error(err);
+                reject(new Error('Google Cloud Storage error'));
+              });
+          
+              blobStream.on('finish', async () => {
+                const publicUrl = `https://storage.googleapis.com/${bucket.name}/${blob.name}`;
+                const newPost = await Post.create({ user, message, filename: publicUrl });
+                resolve(newPost);
+              });
+          
+              blobStream.end(buffer);
+            });
+          
+            try {
+              const post = await uploadPromise;
+              return NextResponse.json({ message: "Post published with image", post }, { status: 201 });
+            } catch (error) {
+              console.log("Error during image upload and post creation: ", error);
+              return NextResponse.json({ message: "Error publishing post with image" }, { status: 500 });
+            }
+          }
         else{
             const newPost = await Post.create({user, message})
             console.log(newPost);

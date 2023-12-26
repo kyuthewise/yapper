@@ -10,7 +10,9 @@ export async function POST(req: any){
         await User.findByIdAndUpdate(userid,{ image: imageid}, {new: true})
     }
     catch(error){
-   
+
+
+    
     }
     return new NextResponse("Post list retrieved", { status: 200 });
 }

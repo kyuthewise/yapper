@@ -26,10 +26,16 @@ const CreatePost = ({ onDataChange }) => {
       formData.append('message', message)
 
       const res = await axios.post('/api/updatePost', formData)
-      onDataChange(message)
-      setMessage('')
-      setFile(null)
-    } catch (error) {
+
+      if (res.status === 200 || res.status === 201) { // Check if post was successful
+        onDataChange(message); // Update the post list after confirmation
+        setMessage('');
+        setFile(null);
+      }
+     
+    } 
+    
+    catch (error) {
       console.log('error during post: ', error)
     }
   }

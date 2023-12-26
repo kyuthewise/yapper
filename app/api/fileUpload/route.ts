@@ -7,6 +7,7 @@ import { query } from "firebase/database";
 import { Storage } from '@google-cloud/storage';
 import mongoose from 'mongoose';
 import { connectMongoDB } from "@/app/lib/server";
+
 export const POST = async (req, res) => {
   const storage = new Storage({
     keyFilename: process.env.GOOGLE_APPLICATION_CREDENTIALS, // Path to your service account key file
@@ -28,6 +29,8 @@ export const POST = async (req, res) => {
   const buffer = Buffer.from(await file.arrayBuffer());
   const filename = `${Date.now()}-${file.name.replaceAll(" ", "_")}`;
   const blob = bucket.file(filename);
+
+
 
   try {
     await connectMongoDB();
