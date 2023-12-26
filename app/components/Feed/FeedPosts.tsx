@@ -27,7 +27,7 @@ const [popup, setPopup] = useState({ show: false, message: '' });
 
  const userid = session?.user?.name
 
-
+console.log('userid',userid)
   const handleLike = async (postid) => {
 
 
@@ -53,7 +53,7 @@ try{
     }
     }
 
-
+    console.log('user list',userList)
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -62,6 +62,7 @@ try{
   
 
         setUserList(response.data.items);
+        
       } catch (error) {
         console.log('error fetching userlist', error);
       }

@@ -15,10 +15,8 @@ export const GET = async(req: Request) => {
       
         return NextResponse.json({
             items: users
-        })
-        console.log('getuserlist: after stuff')
-        // Send a simple response
-        return new NextResponse("User list retrieved", { status: 200 });
+        }, { status: 201 })
+        
       } catch (error) {
         return new NextResponse("User list retrieved", { status: 500 });
     
