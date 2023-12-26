@@ -8,6 +8,7 @@ import { io } from "socket.io-client";
 import { useRouter } from "next/navigation";
 import { isImageFile, isVideoFile } from "./FileUtils";
 import { format, parseISO } from 'date-fns';
+import DarkModeToggle from "./darkMode";
 
 const GetPosts = ({ sharedData, selectedUser}) => {
 
@@ -24,7 +25,6 @@ const [postStates, setPostStates] = useState({});
 
  const userid = session?.user?.name
 
-console.log(sharedData)
 
   const handleLike = async (postid) => {
 
@@ -57,7 +57,7 @@ try{
       try {
         const response = await axios.get('/api/getUserList');
 
-        console.log('userlist items', response.data.items)
+  
 
         setUserList(response.data.items);
       } catch (error) {
@@ -75,7 +75,7 @@ try{
       try {
         const response = await axios.get('/api/getPostList', {
           params: {userid} });
-        console.log('postlist items', response.data.items)
+   
         setPostList(response.data.items);
         
      
@@ -84,7 +84,7 @@ try{
       }
     }
   else{
-    console.log('nouser')
+
   }
     }
       
@@ -123,7 +123,7 @@ const response = await axios.delete(`/api/updatePost`, {
 
 
 try{
-  console.log(postStates[postid])
+
   const response = await axios.post(`/api/setComment`, {
       postid: postid,
       userid: userid,

@@ -12,28 +12,32 @@ export default function Dashboard(){
     useEffect(() => {
         setTimeout(() => {
           setLoading(false);
-        }, 1500); 
+        }, 2000); 
       }, []);
 
     return (
       
 <div>
-<Navbar></Navbar>
 
-<div className="flex h-full bg-gray-300 flex-col mt-20">
+<div className={loading ? 'hidden' : ''}>
+<Navbar></Navbar>
+</div>
+
 {loading && (
-    <div className="flex justify-center items-center h-screen">
+    <div className="flex justify-center h-screen z-30 place-items-center bg-gray-800">
         <BallTriangle
         height={100}
         width={100}
         radius={5}
-        color="#555555"
+        color="#3f4040"
         ariaLabel="ball-triangle-loading"
         wrapperStyle={{}}
         wrapperClass=""
         visible={true}
         />
      </div> )}
+<div className={`${loading ? 'hidden' : 'flex h-full bg-gray-300 dark:bg-gray-800 flex-col mt-20 items-center'}`}>
+
 
 <MainContent></MainContent>
  </div> 

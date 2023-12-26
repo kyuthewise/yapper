@@ -20,6 +20,8 @@ const Navbar = () => {
       try {
         const response = await axios.get(`/api/userSearch`, { params: { term } });
         setSearchResults(response.data.users);
+        console.log('search response', response)
+
       } catch (error) {
         console.error('Error during search:', error);
         setSearchResults([]);
@@ -27,7 +29,7 @@ const Navbar = () => {
     }, 500),
     []
   );
-
+console.log('search results', searchResults)
   useEffect(() => {
     return () => {
       debouncedSearch.cancel();
@@ -60,7 +62,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-white shadow-lg fixed top-0 w-full z-50 dark:text-slate-300 dark:bg-gray-900">
+    <nav className="bg-white shadow-lg fixed top-0 w-full z-40 dark:text-slate-300 dark:bg-gray-900">
       <div className="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center">
         {/* Logo and Home Link */}
         <div className="flex items-center space-x-4">

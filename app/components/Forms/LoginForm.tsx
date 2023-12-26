@@ -31,8 +31,8 @@ export default function LoginForm() {
 
  
   return (
-    <div className="grid place-items-center h-screen bg-gradient-to-r from-violet-200 to-slate-300">
-        <div className="scale-75 bg-white bg-opacity-90 p-12 w-2/6 rounded-3xl shadow-2xl border border-gray-100 transform transition duration-500 hover:scale-90">
+    <div className="grid place-items-center h-screen bg-gradient-to-r from-zinc-800 to-zinc-900">
+        <div className="scale-75 bg-gradient-to-r from-zinc-300 to-zinc-400 bg-opacity-90 p-12 w-2/6 rounded-3xl shadow-2xl border border-gray-100 transform transition duration-500 hover:scale-90">
             <div className="text-center mb-12">
                 <Image
                     src="/icons/logopurplenth.svg"
@@ -76,7 +76,7 @@ export default function LoginForm() {
     className="mt-4 w-full py-3 text-xl text-white bg-black hover:bg-red-900 rounded-lg transition duration-300 ease-in-out hover:scale-105 shadow-lg flex items-center justify-center gap-2"
 >
     <img className="w-6 h-6" src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google logo" />
-    <p>Login with Google&apos;</p>
+    <p>Login with Google</p>
 </button>
 
 
