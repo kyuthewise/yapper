@@ -191,13 +191,13 @@ const formatDate = (dateString) => {
 
 
   return (
-    <div className="bg-gray-300 p-4">
-      <ul className="space-y-8">
+    <div className="bg-gray-300 p-4 dark:bg-gray-800 dark:text-slate-300">
+      <ul className="space-y-8 ">
         {postList.slice().reverse().map((post) => {
           const postState = postStates[post._id] || { comment: '', commentHidden: true };
           if (showAllPosts || (selectedUser && selectedUser === post.user)) {
             return (
-              <li key={post._id} className="bg-white shadow rounded-lg overflow-hidden">
+              <li key={post._id} className="bg-white shadow rounded-lg overflow-hidden dark:bg-gray-900 dark:text-slate-300">
                 {userList.map((user) => {
                   if (user.name === post.user) {
                     return (
@@ -213,10 +213,10 @@ const formatDate = (dateString) => {
                             <span onClick={() => handlePostClick(post.user)} className="text-xl font-semibold cursor-pointer">{post.user}</span>
                           </div>
                           {user.name !== userid && (
-                            <button className="text-indigo-500 hover:text-indigo-600" onClick={() => handleAddFriend(user.name)}><img className="h-6 w-6"src="/icons/addfriend.svg"/></button>
+                            <button className="text-indigo-500 hover:text-indigo-600" onClick={() => handleAddFriend(user.name)}><img className="h-6 w-6 dark:invert"src="/icons/addfriend.svg"/></button>
                           )}
                           {userid === post.user && (
-                            <button className="text-red-500 hover:text-red-600" onClick={() => handleDelete(post._id)}><img className="h-6 w-6" src="/icons/delete.svg"/></button>
+                            <button className="text-red-500 hover:text-red-600" onClick={() => handleDelete(post._id)}><img className="h-6 w-6 dark:invert" src="/icons/delete.svg"/></button>
                           )}
                         </div>
                         <p className="text-sm text-gray-500">{formatDate(post.createdAt)}</p>
@@ -234,7 +234,7 @@ const formatDate = (dateString) => {
 
                         {/* Likes Section */}
                         <div className="flex items-center mb-3">
-                          <button className="mr-2 text-indigo-500 hover:text-indigo-600" onClick={() => handleLike(post._id)}><img className="h-6 w-6"src={(post.likedBy.includes(userid) )|| (likeTrigger === post._id ) ? `/icons/liked.svg` : `/icons/like.svg`}/></button>
+                          <button className="mr-2 text-indigo-500 hover:text-indigo-600" onClick={() => handleLike(post._id)}><img className="h-6 w-6 dark:brightness-200  dark:contrast-125"src={(post.likedBy.includes(userid) )|| (likeTrigger === post._id ) ? `/icons/liked.svg` : `/icons/like.svg`}/></button>
                           <span>{post.likes} {post.likes === 1 ?  `like` : `likes`} </span>
                         </div>
 
@@ -246,7 +246,7 @@ const formatDate = (dateString) => {
                             value={postState.comment}
                             onChange={(e) => handleCommentChange(post._id, e.target.value)}
                             placeholder="Add a comment..."
-                            className="p-2 border border-gray-300 rounded w-full mb-2"
+                            className="p-2 border border-gray-300 rounded w-full mb-2 dark:border-none dark:bg-gray-700 dark:focus:outline-none"
                           />
                           <button className="text-indigo-500 hover:text-indigo-600 mb-2" onClick={() => handleComment(post._id)}>Post Comment</button>
 

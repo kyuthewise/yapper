@@ -3,6 +3,7 @@ import { useState, useCallback, useEffect } from "react";
 import { signOut, useSession } from "next-auth/react";
 import axios from "axios";
 import debounce from 'lodash.debounce';
+import DarkModeToggle from "../Feed/darkMode";
 import { SearchIcon, UserAddIcon, LogoutIcon } from '@heroicons/react/outline'; // Import icons
 const Navbar = () => {
   const { data: session } = useSession();
@@ -59,28 +60,28 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-white shadow-lg fixed top-0 w-full z-50">
+    <nav className="bg-white shadow-lg fixed top-0 w-full z-50 dark:text-slate-300 dark:bg-gray-900">
       <div className="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center">
         {/* Logo and Home Link */}
         <div className="flex items-center space-x-4">
           <Link href="/dashboard">
             <p className="text-gray-800 text-2xl font-bold hover:text-gray-600 cursor-pointer">
-              <img className="h-20 w-20 brightness-75 drop-shadow-lg  "src="/icons/logopurplenth.svg"/>
+              <img className="h-20 w-20 brightness-75 drop-shadow-lg dark:contrast-125"src="/icons/logopurplenth.svg"/>
             </p>
           </Link>
           <Link href="/dashboard">
-            <p className="text-gray-700 text-md hover:text-gray-500 cursor-pointer">
+            <p className="text-gray-700 text-md hover:text-gray-500 cursor-pointer dark:text-slate-300">
               Home
             </p>
           </Link>
         </div>
 
         {/* Search Bar */}
-        <div className="relative flex-grow mx-4">
-          <div className="flex items-center rounded-full bg-gray-100 px-4 py-2">
+        <div className="relative flex-grow mx-4 ">
+          <div className="flex items-center rounded-full bg-gray-100 px-4 py-2 dark:text-slate-300 dark:bg-gray-500">
             <SearchIcon className="h-5 w-5 text-gray-500" />
             <input 
-              className="w-full bg-transparent py-2 px-4 text-gray-700 leading-tight focus:outline-none border-none"
+              className="w-full bg-transparent py-2 px-4 text-gray-700 leading-tight focus:outline-none border-none dark:text-slate-300 dark:bg-gray-500"
               type="text"
               placeholder="Search..."
               value={searchTerm}
@@ -112,10 +113,11 @@ const Navbar = () => {
         {/* Sign Out Button */}
         <button 
           onClick={() => signOut()}
-          className="ml-4 py-2 px-3 text-gray-800 bg-transparent hover:bg-gray-200 rounded transition-colors duration-300 flex items-center"
+          className="ml-4 py-2 px-3 text-gray-800 bg-transparent hover:bg-gray-200 rounded transition-colors duration-300 flex items-center dark:text-slate-300"
         >
           <LogoutIcon className="h-5 w-5 mr-2" />Sign Out
         </button>
+        <DarkModeToggle/>
       </div>
     </nav>
   );

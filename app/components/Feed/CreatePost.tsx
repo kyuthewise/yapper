@@ -35,10 +35,10 @@ const CreatePost = ({ onDataChange }) => {
   }
 
   return (
-    <div className="bg-white rounded-lg shadow p-4 mt-5">
+    <div className="bg-white rounded-lg shadow p-4 mt-5 dark:text-slate-300 dark:bg-gray-900">
       <form onSubmit={handleSubmit}>
         <textarea
-          className="w-full h-32 p-3 border border-gray-200 rounded-t-lg focus:outline-none focus:border-indigo-500"
+          className=" resize-none w-full h-32 p-3 border border-gray-200 dark:border-gray-600 rounded-t-lg dark:text-slate-300 dark:bg-gray-900 focus:outline-none focus:border-indigo-500"
           placeholder="Share your thoughts..."
           onChange={(e) => setMessage(e.target.value)}
           value={message}
@@ -46,7 +46,7 @@ const CreatePost = ({ onDataChange }) => {
         <div className="flex justify-between items-center pt-2">
           <div>
             <label htmlFor="fileInput" className="cursor-pointer">
-              <img src="/icons/uploadimageicon.svg" alt="Upload" className="h-6 w-6 inline-block mr-2"/>
+              <img src="/icons/uploadimageicon.svg" alt="Upload" className="h-6 w-6 inline-block mr-2 dark:invert dark:contrast-50"/>
               <span className="text-sm text-indigo-500 hover:text-indigo-600">Add Image</span>
             </label>
             <input type="file" id="fileInput" className="hidden" onChange={handleFile} />

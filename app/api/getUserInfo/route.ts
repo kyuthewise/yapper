@@ -13,7 +13,7 @@ export async function GET(req, res) {
             const user = await User.findOne({ name: userid });
             const userInfo = user.info
             if (!user) {
-                return res.status(404).json({ message: 'User not found' });
+                return NextResponse.json({message: "usr not found"}, {status: 404})
             }
             return NextResponse.json({userInfo
             })

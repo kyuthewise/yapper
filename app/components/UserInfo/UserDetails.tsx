@@ -106,7 +106,7 @@ setIsEditMode(false)
         console.log(profileImage)
         
       return (
-        <div className="bg-gray-50 rounded-lg w-full max-w-sm p-5 flex flex-col justify-center items-center shadow-lg">
+        <div className="bg-gray-50 rounded-lg w-full max-w-sm p-5 flex flex-col justify-center items-center shadow-lg dark:bg-gray-900 dark:text-slate-300">
           
           <div className="flex flex-col items-center">
             
@@ -115,7 +115,7 @@ setIsEditMode(false)
                 key={imgurl}
                 src={profileImage || '/uploads/defaultimg.svg'}
                 alt="Profile"
-                className="object-cover w-full h-full"
+                className="object-cover w-full h-full "
               />
               <div className="absolute inset-0 flex justify-center items-center bg-black bg-opacity-50 hover:bg-opacity-60 opacity-0 hover:opacity-100 transition-opacity duration-300">
                 <CameraIcon className="h-8 w-8 text-white" />
@@ -137,11 +137,11 @@ setIsEditMode(false)
     
           <div className="text-2xl font-semibold mb-4">{userid}</div>
               
-          <div className="w-full">
+          <div className="w-full ">
             {isEditMode ? (
               <div className="space-y-4">
                 <input
-                  className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent "
                   type="text"
                   name="Hobbies"
                   value={userInfo.Hobbies}
@@ -177,13 +177,13 @@ setIsEditMode(false)
                 </button>
               </div>
             ) : (
-              <div className="space-y-3">
-                <p className="text-gray-700">Hobbies: <span className="text-gray-900 font-medium">{userInfo.Hobbies || 'Add Hobbies'}</span></p>
-                <p className="text-gray-700">Location: <span className="text-gray-900 font-medium">{userInfo.Location || 'Add Location'}</span></p>
-                <p className="text-gray-700">Education: <span className="text-gray-900 font-medium">{userInfo.Education || 'Add Education'}</span></p>
-                <p className="text-gray-700">About Me: <span className="text-gray-900 font-medium">{userInfo.Aboutme || 'Add About Me'}</span></p>
+              <div className="space-y-3 " >
+                <p className="text-gray-700 dark:text-slate-300">Hobbies: <span className=" dark:text-slate-300 text-gray-900 font-medium">{userInfo.Hobbies || 'Add Hobbies'}</span></p>
+                <p className="text-gray-700 dark:text-slate-300">Location: <span className="text-gray-900 dark:text-slate-300 font-medium">{userInfo.Location || 'Add Location'}</span></p>
+                <p className="text-gray-700 dark:text-slate-300">Education: <span className="text-gray-900 dark:text-slate-300 font-medium">{userInfo.Education || 'Add Education'}</span></p>
+                <p className="text-gray-700 dark:text-slate-300">About Me: <span className="text-gray-900 dark:text-slate-300 font-medium">{userInfo.Aboutme || 'Add About Me'}</span></p>
                 {(!currentUserId || !userid || userid === currentUserId) && (
-                  <button className="w-full px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-300 flex justify-center items-center" onClick={() => setIsEditMode(true)}>
+                  <button className="w-full px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors duration-300 flex justify-center items-center" onClick={() => setIsEditMode(true)}>
                     <PencilIcon className="h-5 w-5 mr-2" /> Edit Info
                   </button>
                 )}

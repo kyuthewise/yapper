@@ -36,7 +36,7 @@ const currentUserid = userid || session?.user?.name;
 
 
   return(
-  <div className="bg-white h-5/6 fixed left-0 w-96 mt-10 mb-10 rounded-lg ml-10 ">
+  <div className="bg-white h-5/6 fixed left-0 w-96 mt-10 mb-10 rounded-lg ml-10 dark:bg-gray-900">
     <Comp userid={currentUserid} currentUserId={currentUserId}></Comp>
   </div>
     

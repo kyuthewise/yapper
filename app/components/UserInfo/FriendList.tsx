@@ -62,7 +62,7 @@ const handleClick = async () =>{
 }
 return (
   <div>
-    <div className="h-5/6 bg-gray-50 w-80 mt-10 mb-10 mr-10 rounded-lg max-h-5/6 shadow-xl flex flex-col items-center justify-center fixed right-0">
+    <div className="h-5/6 bg-gray-50 w-80 mt-10 mb-10 mr-10 rounded-lg max-h-5/6 shadow-xl flex flex-col items-center justify-center fixed right-0 dark:bg-gray-900 dark:text-slate-300">
       <h2 className="text-xl font-semibold my-4">Friendlist</h2>
       <ul className="h-full w-full flex flex-col overflow-y-auto">
         {userList.map((user) => {
@@ -71,7 +71,7 @@ return (
               <li key={user.name} onClick={() => setSelectedUser(user.name)} className="flex items-center justify-between p-3 hover:bg-gray-100 cursor-pointer">
                 <div className="flex items-center">
                   <img
-                    className="h-12 w-12 object-cover rounded-full mr-4"
+                    className="h-12 w-12 object-cover rounded-full mr-4 "
                     src={user.image  ? user.image : `/uploads/defaultimg.svg`}
                     alt="Profile"
                   />
