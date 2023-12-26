@@ -65,7 +65,9 @@ console.log('search results', searchResults)
   return (
     <nav className="bg-white shadow-lg fixed top-0 w-full z-40 dark:text-slate-300 dark:bg-gray-900">
       <div className="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center">
+        
         {/* Logo and Home Link */}
+
         <div className="flex items-center space-x-4">
           <Link href="/dashboard">
             <p className="text-gray-800 text-2xl font-bold hover:text-gray-600 cursor-pointer">
