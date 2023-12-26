@@ -104,6 +104,7 @@ setIsEditMode(false)
         }
       };
         console.log(profileImage)
+        
       return (
         <div className="bg-gray-50 rounded-lg w-full max-w-sm p-5 flex flex-col justify-center items-center shadow-lg">
           
@@ -112,7 +113,7 @@ setIsEditMode(false)
             <label className="relative rounded-full h-32 w-32 cursor-pointer overflow-hidden mb-4">
               <img
                 key={imgurl}
-                src={profileImage ? profileImage : `/uploads/defaultimg.svg`}
+                src={profileImage || '/uploads/defaultimg.svg'}
                 alt="Profile"
                 className="object-cover w-full h-full"
               />

@@ -10,7 +10,7 @@ const updateUsersWithDefaultPicture = async () => {
     const usersWithoutPicture = await User.find({ image: { $exists: false } });
 
     // Set a default profile picture URL
-    const defaultProfilePictureUrl = 'defaultimg.svg';
+    const defaultProfilePictureUrl = '/uploads/defaultimg.svg';
 
     // Update users with the default profile picture
     const updatePromises = usersWithoutPicture.map(user =>
