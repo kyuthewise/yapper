@@ -6,7 +6,7 @@ import { NextResponse } from "next/server";
 
 
 
-export const GET = async(req: Request) => {
+export const GET = async(req) => {
   console.log('getuserlist: before try')
     try {
       console.log('getuserlist: after try')
