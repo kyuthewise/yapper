@@ -15,6 +15,7 @@ export default function Comp({userid, currentUserId}){
     
     const fileInputRef = useRef(null);
         const {data:session} = useSession();
+
         const [image, setImage] = useState('')
         const [profileImage, setProfileImage] = useState('')
         const [imageUrl, setImageUrl] = useState('')
@@ -106,7 +107,7 @@ setIsEditMode(false)
         console.log(profileImage)
         
       return (
-        <div className="bg-gray-50 rounded-lg w-full max-w-sm p-5 flex flex-col justify-center items-center shadow-lg dark:bg-gray-900 dark:text-slate-300">
+        <div className="bg-gray-50 rounded-lg w-full max-w-sm p-5 flex flex-col items-center shadow-lg dark:bg-gray-900 dark:text-slate-300 h-full mt-10">
           
           <div className="flex flex-col items-center">
             
@@ -137,9 +138,17 @@ setIsEditMode(false)
     
           <div className="text-2xl font-semibold mb-4">{userid}</div>
               
-          <div className="w-full ">
+          <div className="h-full w-full ">
             {isEditMode ? (
               <div className="space-y-4">
+                  <input
+                  className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  type="text"
+                  name="Aboutme"
+                  value={userInfo.Aboutme}
+                  onChange={handleInputChange}
+                  placeholder="Add About Me"
+                />
                 <input
                   className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent "
                   type="text"
@@ -164,29 +173,27 @@ setIsEditMode(false)
                   onChange={handleInputChange}
                   placeholder="Add Education"
                 />
-                <input
-                  className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                  type="text"
-                  name="Aboutme"
-                  value={userInfo.Aboutme}
-                  onChange={handleInputChange}
-                  placeholder="Add About Me"
-                />
+      
                 <button className="w-full px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors duration-300 flex justify-center items-center" onClick={handleSubmit}>
                   Save Changes
                 </button>
+                                <p className="text-gray-700 dark:text-slate-300">About Me: <span className="text-gray-900 dark:text-slate-300 font-medium">{userInfo.Aboutme || 'Add About Me'}</span></p>
               </div>
             ) : (
-              <div className="space-y-3 " >
-                <p className="text-gray-700 dark:text-slate-300">Hobbies: <span className=" dark:text-slate-300 text-gray-900 font-medium">{userInfo.Hobbies || 'Add Hobbies'}</span></p>
+              
+              <div className="space-y-3 h-full" >
+                <div className=""> <p className="text-gray-700 text-center dark:text-slate-300">About Me: <span className="text-gray-900 dark:text-slate-300 font-medium">{userInfo.Aboutme || 'Add About Me'}</span></p></div>
+                <div className="mt-10">
                 <p className="text-gray-700 dark:text-slate-300">Location: <span className="text-gray-900 dark:text-slate-300 font-medium">{userInfo.Location || 'Add Location'}</span></p>
+                <p className="text-gray-700 dark:text-slate-300">Hobbies: <span className=" dark:text-slate-300 text-gray-900 font-medium">{userInfo.Hobbies || 'Add Hobbies'}</span></p>
                 <p className="text-gray-700 dark:text-slate-300">Education: <span className="text-gray-900 dark:text-slate-300 font-medium">{userInfo.Education || 'Add Education'}</span></p>
-                <p className="text-gray-700 dark:text-slate-300">About Me: <span className="text-gray-900 dark:text-slate-300 font-medium">{userInfo.Aboutme || 'Add About Me'}</span></p>
                 {(!currentUserId || !userid || userid === currentUserId) && (
                   <button className="w-full px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors duration-300 flex justify-center items-center" onClick={() => setIsEditMode(true)}>
                     <PencilIcon className="h-5 w-5 mr-2" /> Edit Info
                   </button>
+                  
                 )}
+                </div>
               </div>
             )}
           </div>

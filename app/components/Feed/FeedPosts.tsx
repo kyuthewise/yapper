@@ -8,6 +8,7 @@ import { io } from "socket.io-client";
 import { useRouter } from "next/navigation";
 import { isImageFile, isVideoFile } from "./FileUtils";
 import { format, parseISO } from 'date-fns';
+import Popup from "./popup";
 import DarkModeToggle from "./darkMode";
 
 const GetPosts = ({ sharedData, selectedUser}) => {
@@ -22,6 +23,7 @@ const GetPosts = ({ sharedData, selectedUser}) => {
 const [commentHidden, setCommentHidden] = useState(true)
 const [likeTrigger, setLikeTrigger] = useState(false);
 const [postStates, setPostStates] = useState({});
+const [popup, setPopup] = useState({ show: false, message: '' });
 
  const userid = session?.user?.name
 
@@ -106,7 +108,9 @@ const handleDelete = async (postid) =>{
   try{
 const response = await axios.delete(`/api/updatePost`, {
   params: {postid}
+
 })
+showPopup('Post deleted');
 
 
 
@@ -114,7 +118,7 @@ const response = await axios.delete(`/api/updatePost`, {
   catch{
 
 }
-
+setLikeTrigger(!likeTrigger)
   }
 
 
@@ -159,7 +163,7 @@ const response = await axios.post('/api/addFriend', {
     }
 
 })
-
+showPopup('Friend added');
 }
 catch{
 
@@ -189,9 +193,21 @@ const formatDate = (dateString) => {
   return format(date, 'PPp'); // Example format: June 23, 2020, 11:30 PM
 };
 
+const showPopup = (message) => {
+  setPopup({ show: true, message });
+};
+
+// Function to hide pop-up
+const hidePopup = () => {
+  setPopup({ show: false, message: '' });
+};
+
+
+
 
   return (
     <div className="bg-gray-300 p-4 dark:bg-gray-800 dark:text-slate-300">
+      <Popup message={popup.message} show={popup.show} onClose={hidePopup} />
       <ul className="space-y-8 ">
         {postList.slice().reverse().map((post) => {
           const postState = postStates[post._id] || { comment: '', commentHidden: true };

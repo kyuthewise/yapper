@@ -83,10 +83,10 @@ console.log('search results', searchResults)
 
         {/* Search Bar */}
         <div className="relative flex-grow mx-4 ">
-          <div className="flex items-center rounded-full bg-gray-100 px-4 py-2 dark:text-slate-300 dark:bg-gray-500">
+          <div className="flex items-center rounded-full bg-gray-100 px-4 py-2 dark:text-slate-300 dark:bg-gray-600">
             <SearchIcon className="h-5 w-5 text-gray-500" />
             <input 
-              className="w-full bg-transparent py-2 px-4 text-gray-700 leading-tight focus:outline-none border-none dark:text-slate-300 dark:bg-gray-500"
+              className="w-full bg-transparent py-2 px-4 text-gray-700 leading-tight focus:outline-none border-none dark:text-slate-300 dark:bg-gray-600"
               type="text"
               placeholder="Search..."
               value={searchTerm}
@@ -94,17 +94,17 @@ console.log('search results', searchResults)
             />
           </div>
           {searchResults && searchResults.length > 0 && (
-            <div className="absolute top-full left-0 right-0 bg-white shadow-md mt-1 rounded z-10">
+            <div className="absolute top-full left-0 right-0 bg-white dark:bg-gray-600 p-2 shadow-md mt-1 rounded z-10 p-3">
               {searchResults.map((user) => (
-                <div key={user._id} className="p-2 hover:bg-gray-100 flex justify-between items-center">
+                <div key={user._id} className="p-2 hover:bg-gray-100 rounded-lg dark:hover:bg-gray-500 flex justify-between items-center">
                   <span>{user.name}</span>
                   <div>
                     <Link href={`/profile?userid=${user.name}`}>
-                      <p className="text-sm bg-blue-500 hover:bg-blue-600 text-white py-1 px-2 rounded mr-2 cursor-pointer">View Profile</p>
+                      <p className="text-sm bg-blue-500 dark:bg-blue-600 dark:hover:bg-blue-700 hover:bg-blue-600 text-white py-1 px-2 rounded mr-2 cursor-pointer">View Profile</p>
                     </Link>
                     <button
                       onClick={() => handleAddFriend(user.name)}
-                      className="text-sm bg-green-500 hover:bg-green-600 text-white py-1 px-2 rounded flex items-center"
+                      className="text-sm bg-indigo-700 hover:bg-indigo-800 text-white py-1 px-2 rounded flex items-center"
                     >
                       <UserAddIcon className="h-4 w-4 mr-1" />Add Friend
                     </button>
