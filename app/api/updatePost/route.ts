@@ -10,7 +10,7 @@ export async function POST (req, res) {
     const googleServiceJson = JSON.parse(Buffer.from(process.env.GOOGLE_SERVICE_JSON, 'base64').toString());
 
     const storage = new Storage({
-        keyFilename: googleServiceJson, // Path to your service account key file
+        credentials: googleServiceJson, // Path to your service account key file
       });
       const bucket = storage.bucket(process.env.GCLOUD_STORAGE_BUCKET); 
 
