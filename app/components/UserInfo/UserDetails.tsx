@@ -19,6 +19,7 @@ export default function Comp({userid, currentUserId}){
         const [image, setImage] = useState('')
         const [profileImage, setProfileImage] = useState('')
         const [imageUrl, setImageUrl] = useState('')
+        const [darkMode, setDarkMode] = useState(Boolean)
         const [userInfo, setUserInfo] = useState({
           Hobbies: '',
           Education: '',
@@ -43,15 +44,16 @@ export default function Comp({userid, currentUserId}){
         try {
           const userInfoResponse = await axios.get('/api/getUserInfo', { params: { userid } });
           const userImageResponse = await axios.get('/api/getUserImage', { params: { userid } });
-          console.log('userimgrs ', userImageResponse)
+
           setUserInfo(userInfoResponse.data.userInfo || {
             Hobbies: '',
             Education: '',
             Location: '',
             Aboutme: ''
           });
-  
+          setDarkMode(userInfoResponse.data.darkmode)
           setProfileImage(userImageResponse.data.items);
+         
         } catch (error) {
           console.error('Error fetching data:', error);
         }
@@ -87,14 +89,14 @@ setIsEditMode(false)
     catch{
     }
   };
-
+console.log('dm details', darkMode)
     const handleImageUpload = async () => {
         try {
           if(!image) return;
           const formData = new FormData();
           formData.append('image', image);
           formData.append('userid', userid);
-          console.log('image: ', image)
+
           // Assume '/api/upload' is your server endpoint for image upload
           const response = await axios.post(`/api/fileUpload`, formData)
           setImage('')
@@ -104,17 +106,17 @@ setIsEditMode(false)
           console.error('Error uploading image:', error);
         }
       };
-        console.log(profileImage)
+ 
         
       return (
-        <div className="bg-gray-50 rounded-lg w-full max-w-sm p-5 flex flex-col items-center shadow-lg dark:bg-gray-900 dark:text-slate-300 h-full mt-10">
+        <div className="bg-gray-50 rounded-lg w-full max-w-sm p-5 flex flex-col items-center shadow-lg dark:bg-gray-900 dark:text-slate-300 h-96 mt-10">
           
           <div className="flex flex-col items-center">
             
             <label className="relative rounded-full h-32 w-32 cursor-pointer overflow-hidden mb-4">
               <img
                 key={imgurl}
-                src={profileImage || '/uploads/defaultimg.svg'}
+                src={profileImage || (darkMode === true ? '/uploads/defaultimgdark.svg' : '/uploads/defaultimg.svg') }
                 alt="Profile"
                 className="object-cover w-full h-full "
               />

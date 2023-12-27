@@ -27,7 +27,7 @@ const [popup, setPopup] = useState({ show: false, message: '' });
 
  const userid = session?.user?.name
 
-console.log('userid',userid)
+
   const handleLike = async (postid) => {
 
 
@@ -71,7 +71,7 @@ try{
     fetchData();
   }, [userid, sharedData]);
 
-  console.log('user list',userList)
+
   useEffect(() => {
 
     const fetchData = async () => {
@@ -80,7 +80,7 @@ try{
         const response = await axios.get('/api/getPostList', {
           params: {userid} });
         
-          console.log(response.data.items)
+  
         setPostList(response.data.items);
         
      
@@ -145,7 +145,7 @@ try{
   )
 
   setLikeTrigger(!likeTrigger)
-  console.log('ltr')
+
 }
 
 catch(error){

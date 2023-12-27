@@ -1,4 +1,4 @@
-import mongoose, { Schema, models } from "mongoose";
+import mongoose, { Schema, models, trusted } from "mongoose";
 
 const userSchema = new Schema({
     name: {
@@ -17,7 +17,12 @@ const userSchema = new Schema({
     image: {
         type: String,
         required: false,
-        default: '/uploads/defaultimg.svg'
+        default: '/uploads/defaultimgdark.svg'
+    },
+    DarkMode: {
+        type: Boolean,
+        required: false,
+        default: false
     },
     info: {
     Job: {

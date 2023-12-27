@@ -10,6 +10,10 @@ const Navbar = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState([]);
   const userid = session?.user?.name
+
+
+
+
   const debouncedSearch = useCallback(
     debounce(async (term) => {
       if (!term.trim()) {
@@ -83,10 +87,10 @@ console.log('search results', searchResults)
 
         {/* Search Bar */}
         <div className="relative flex-grow mx-4 ">
-          <div className="flex items-center rounded-full bg-gray-100 px-4 py-2 dark:text-slate-300 dark:bg-gray-600">
+          <div className="flex items-center rounded-full bg-gray-100 px-4 py-2 dark:text-slate-300 dark:bg-gray-700">
             <SearchIcon className="h-5 w-5 text-gray-500" />
             <input 
-              className="w-full bg-transparent py-2 px-4 text-gray-700 leading-tight focus:outline-none border-none dark:text-slate-300 dark:bg-gray-600"
+              className="w-full bg-transparent py-2 px-4 text-gray-700 leading-tight focus:outline-none border-none dark:text-slate-300 dark:bg-gray-"
               type="text"
               placeholder="Search..."
               value={searchTerm}
@@ -94,7 +98,7 @@ console.log('search results', searchResults)
             />
           </div>
           {searchResults && searchResults.length > 0 && (
-            <div className="absolute top-full left-0 right-0 bg-white dark:bg-gray-600 p-2 shadow-md mt-1 rounded z-10 p-3">
+            <div className="absolute top-full left-0 right-0 bg-white dark:bg-gray-700 p-2 shadow-md mt-1 rounded z-10 p-3">
               {searchResults.map((user) => (
                 <div key={user._id} className="p-2 hover:bg-gray-100 rounded-lg dark:hover:bg-gray-500 flex justify-between items-center">
                   <span>{user.name}</span>
@@ -104,7 +108,7 @@ console.log('search results', searchResults)
                     </Link>
                     <button
                       onClick={() => handleAddFriend(user.name)}
-                      className="text-sm bg-indigo-700 hover:bg-indigo-800 text-white py-1 px-2 rounded flex items-center"
+                      className="text-sm bg-indigo-500 hover:bg-indigo-600 dark:bg-indigo-600 dark:hover:bg-indigo-700 text-white py-1 px-2 rounded flex items-center"
                     >
                       <UserAddIcon className="h-4 w-4 mr-1" />Add Friend
                     </button>
@@ -118,7 +122,7 @@ console.log('search results', searchResults)
         {/* Sign Out Button */}
         <button 
           onClick={() => signOut()}
-          className="ml-4 py-2 px-3 text-gray-800 bg-transparent hover:bg-gray-200 rounded transition-colors duration-300 flex items-center dark:text-slate-300"
+          className="ml-4 py-2 px-3 text-gray-800 bg-transparent hover:bg-gray-200 dark:hover:bg-gray-500 rounded transition-colors duration-300 flex items-center dark:text-slate-300"
         >
           <LogoutIcon className="h-5 w-5 mr-2" />Sign Out
         </button>

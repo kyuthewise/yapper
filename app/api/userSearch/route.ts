@@ -7,6 +7,7 @@ export async function GET(req, res) {
     
     const { searchParams} = new URL(req.url);
     const term = searchParams.get('term')
+    const userid = searchParams.get('userid')
         try {
 
             await connectMongoDB(); 
