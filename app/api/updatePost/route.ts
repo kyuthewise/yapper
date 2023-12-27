@@ -53,7 +53,7 @@ export async function POST (req, res) {
           
             try {
               const post = await uploadPromise;
-              return NextResponse.json({ message: "Post published with image", post }, { status: 201 });
+              return NextResponse.json({ message: "Post published with image"}, { status: 201 });
             } catch (error) {
               console.log("Error during image upload and post creation: ", error);
               return NextResponse.json({ message: "Error publishing post with image" }, { status: 500 });
