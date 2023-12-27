@@ -7,10 +7,13 @@ import { query } from "firebase/database";
 import { Storage } from '@google-cloud/storage';
 import mongoose from 'mongoose';
 import { connectMongoDB } from "@/app/lib/server";
-
 export const POST = async (req, res) => {
+
+  const googleServiceJson = JSON.parse(Buffer.from(process.env.GOOGLE_SERVICE_JSON, 'base64').toString());
+
+
   const storage = new Storage({
-    keyFilename: process.env.GOOGLE_APPLICATION_CREDENTIALS, // Path to your service account key file
+    credentials: googleServiceJson, // Path to your service account key file
   });
   const bucket = storage.bucket(process.env.GCLOUD_STORAGE_BUCKET); // Your Google Cloud Storage bucket name
 
@@ -29,6 +32,8 @@ export const POST = async (req, res) => {
   const buffer = Buffer.from(await file.arrayBuffer());
   const filename = `${Date.now()}-${file.name.replaceAll(" ", "_")}`;
   const blob = bucket.file(filename);
+
+
 
 
 

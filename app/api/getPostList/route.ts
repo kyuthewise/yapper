@@ -10,16 +10,16 @@ import { useSearchParams } from "next/navigation";
 
 export async function GET(req ,res){
   
-  console.log('getpostlist: bef try')
+const br = process.env.GCLOUD_SERVICE_KEY
+  console.log('prcsaewaeweweewe: ',br)
     try {
       const { searchParams} = new URL(req.url);
       const userid = searchParams.get('userid')
-      console.log('getpostlist: af try')
+
       await connectMongoDB()
 
         const posts = await Post.find()
-        console.log('getpostlist: af c')
-        console.log(posts)
+
         return NextResponse.json({
             items: posts
         })
