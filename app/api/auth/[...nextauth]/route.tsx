@@ -2,18 +2,19 @@ import { connectMongoDB } from "@/app/lib/server";
 import User from "@/app/models/user";
 import NextAuth from "next-auth/next";
 import CredentialsProvider from "next-auth/providers/credentials";
-import { SessionContext } from "next-auth/react";
 import bcrypt from 'bcryptjs'
 import GoogleProvider from "next-auth/providers/google";
-
-export const authOptions = {
+import { Credentials } from "@/app/types/types";
+import { NextAuthOptions, SessionStrategy } from "next-auth";
+import { Userface } from "@/app/types/types";
+export const authOptions: NextAuthOptions= {
     providers: [
         CredentialsProvider({
             name: "credentials",
             credentials: {
 
             },
-            async authorize(credentials){
+            async authorize(credentials: Credentials){
                 const {name, password} = credentials;
                 
                 try{
@@ -36,8 +37,8 @@ console.log("error: ", error)
             }
         }),
         GoogleProvider({
-            clientId: process.env.GOOGLE_CLIENT_ID,
-            clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+            clientId: process.env.GOOGLE_CLIENT_ID!,
+            clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
         }),
     ],
     session: {
@@ -51,6 +52,7 @@ console.log("error: ", error)
         async signIn({ user, account, credentials }) {
             await connectMongoDB(); // Ensure database connection
 
+            if(account && credentials){
             if (account.provider === 'google') {
                 // Google Provider logic
                 let existingUser = await User.findOne({ email: user.email });
@@ -72,11 +74,13 @@ console.log("error: ", error)
                 const passwordMatch = await bcrypt.compare(credentials.password, foundUser.password);
                 return passwordMatch; // Return true if password matches, false otherwise
             }
+        }
         }, 
         async jwt({ token, user }) {
             // When user signs in, add their MongoDB _id to the JWT token
             if (user) {
-                token.userId = user._id;  // Add the MongoDB _id
+                token.userId = user._id; 
+                 // Add the MongoDB _id
             }
             return token;
         },

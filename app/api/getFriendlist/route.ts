@@ -19,8 +19,10 @@ try {
 
        const user = await User.findOne({name: userid})
        
-       const friends = await User.find({ name: {$in: user.friends}});
-            console.log('friends: ',friends)
+       const friends = await User.find(
+        { name: { $in: user.friends } },
+        { name: 1, image: 1 }
+      );
         return NextResponse.json({friends}, {status: 201})
         }
 

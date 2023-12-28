@@ -4,12 +4,12 @@ import Post from "@/app/models/post";
 import { Storage } from '@google-cloud/storage';
 
 export async function POST (req, res) {
-    const googleServiceJson = JSON.parse(Buffer.from(process.env.GOOGLE_SERVICE_JSON, 'base64').toString());
+    const googleServiceJson = JSON.parse(Buffer.from(process.env.GOOGLE_SERVICE_JSON!, 'base64').toString());
 
     const storage = new Storage({
         credentials: googleServiceJson, // Path to your service account key file
       });
-      const bucket = storage.bucket(process.env.GCLOUD_STORAGE_BUCKET); 
+      const bucket = storage.bucket(process.env.GCLOUD_STORAGE_BUCKET!); 
 
     const formData = await req.formData();
         const file = formData.get("file")

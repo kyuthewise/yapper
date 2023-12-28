@@ -1,13 +1,12 @@
 import { connectMongoDB } from "@/app/lib/server";
 import User from "@/app/models/user";
-import { useSearchParams } from "next/navigation";
 import { NextResponse } from "next/server";
 
-export async function GET(req, res) {
+export async function GET(req: Request, res: Response) {
     
     const { searchParams} = new URL(req.url);
     const term = searchParams.get('term')
-    const userid = searchParams.get('userid')
+
         try {
 
             await connectMongoDB(); 

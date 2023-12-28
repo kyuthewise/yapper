@@ -8,12 +8,12 @@ import { PencilIcon, CameraIcon } from '@heroicons/react/outline'; // Importing 
 export default function Comp({userid, currentUserId}){
   {
     
-    const fileInputRef = useRef(null);
+        const fileInputRef = useRef<HTMLInputElement>(null);
         const {data:session} = useSession();
 
-        const [image, setImage] = useState('')
-        const [profileImage, setProfileImage] = useState('')
-        const [imageUrl, setImageUrl] = useState('')
+        const [image, setImage] = useState<string>('')
+        const [profileImage, setProfileImage] = useState<string>('')
+        const [imageUrl, setImageUrl] = useState<string>('')
         const [renderTrigger, setRenderTrigger] = useState(false)
         const [darkMode, setDarkMode] = useState(Boolean)
         const [userInfo, setUserInfo] = useState({
@@ -23,9 +23,11 @@ export default function Comp({userid, currentUserId}){
           Aboutme: ''
         });
         const [isEditMode, setIsEditMode] = useState(false);
+        
      const handleClick = () => {
-      // Trigger a click on the file input when the profile picture is clicked
+      if(fileInputRef.current){
       fileInputRef.current.click();
+      }
     };
     
     const handleImageChange = async (e) =>{

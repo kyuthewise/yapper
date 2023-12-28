@@ -7,15 +7,19 @@ import Chat from "../Chat/chat";
 import { io } from "socket.io-client";
 import { useSession } from "next-auth/react";
 import { ChatAltIcon } from '@heroicons/react/outline';
-const FriendList = (eventTrigger) => {
+import { Userface, GetPostsProps } from "@/app/types/types";
 
-    const [userList, setUserList] = useState([])
+const FriendList = ({eventTrigger}) => {
+
+  const serverUrl = process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:3000';
+
+    const [userList, setUserList] = useState<Userface[]>([])
     const {data:session} = useSession()
     const [selectedUser, setSelectedUser] = useState('')
-    const userid = session?.user?.name
+    const userid = session?.user?.name as string
 
 
-console.log('et:', eventTrigger)
+    console.log(userList)
 useEffect(() =>{
 
 const fetchData = async () =>{
@@ -41,7 +45,7 @@ fetchData()
 }, [userid, eventTrigger])
 
 useEffect(() => {
-    const socket = io(process.env.NEXT_PUBLIC_SERVER_URL);
+    const socket = io(serverUrl);
     socket.emit('login', userid);
     const audio = new Audio('/audio/bubblepop.wav')
       

@@ -10,26 +10,25 @@ import { isImageFile, isVideoFile } from "./FileUtils";
 import { format, parseISO } from 'date-fns';
 import Popup from "./popup";
 import DarkModeToggle from "./darkMode";
+import { Post,Userface,Comment,GetPostsProps } from "@/app/types/types";
+
 
 const GetPosts = ({ sharedData, selectedUser, setEventTrigger, eventTrigger}) => {
 
   const router = useRouter();
-  const [postList, setPostList] = useState([]);
-  const [userList, setUserList] = useState([]);
+  const [postList, setPostList] = useState<Post[]>([]);
+  const [userList, setUserList] = useState<Userface[]>([]);
  const {data:session} = useSession()
- const [triggerFetch, setTriggerFetch] = useState(false);
- const [comment, setComment] = useState('')
  const [showAllPosts, setShowAllPosts] = useState(true)
-const [commentHidden, setCommentHidden] = useState(true)
 const [likeTrigger, setLikeTrigger] = useState(false);
 const [postStates, setPostStates] = useState({});
 const [popup, setPopup] = useState({ show: false, message: '' });
 
- const userid = session?.user?.id
- const username = session?.user?.name
+ const userid = session?.user?.id as string
+ const username = session?.user?.name as string
 
 
-const handleLike = async (postid) => {
+const handleLike = async (postid:string) => {
 
 
 try{
@@ -125,6 +124,8 @@ showPopup('Post deleted');
 setLikeTrigger(!likeTrigger)
   }
 
+console.log('ul', userList)
+console.log('pl', postList)
 
 
   const handleComment = async (postid) =>{
@@ -170,7 +171,7 @@ const response = await axios.post('/api/addFriend', {
 })
 
 if(response.status === 200 || response.status === 201){
-  showPopup('User followed!');
+  showPopup('User followed');
   setEventTrigger(!eventTrigger)
 }
 }
@@ -190,19 +191,19 @@ useEffect(() =>{
     setShowAllPosts(false)
   }
 }, [])
-const handleCommentChange = (postId, value) => {
+const handleCommentChange = (postId:string, value:string) => {
   setPostStates(prev => ({ ...prev, [postId]: { ...prev[postId], comment: value } }));
 };
-const toggleCommentVisibility = (postId) => {
+const toggleCommentVisibility = (postId:string) => {
   setPostStates(prev => ({ ...prev, [postId]: { ...prev[postId], commentHidden: !prev[postId].commentHidden } }));
 };
 
-const formatDate = (dateString) => {
+const formatDate = (dateString:string) => {
   const date = parseISO(dateString);
   return format(date, 'PPp'); 
 };
 
-const showPopup = (message) => {
+const showPopup = (message:string) => {
   setPopup({ show: true, message });
 };
 
@@ -258,7 +259,8 @@ const hidePopup = () => {
 
                         {/* Likes Section */}
                         <div className="flex items-center mb-3">
-                          <button className="mr-2 text-indigo-500 hover:text-indigo-600" onClick={() => handleLike(post._id)}><img className="h-6 w-6 dark:brightness-200  dark:contrast-125"src={(post.likedBy.includes(username) )|| (likeTrigger === post._id ) ? `/icons/liked.svg` : `/icons/like.svg`}/></button>
+                          <button className="mr-2 text-indigo-500 hover:text-indigo-600" onClick={() => handleLike(post._id)}><img className="h-6 w-6 dark:brightness-200  
+                          dark:contrast-125"src={(post.likedBy.includes(userid) ) ? `/icons/liked.svg` : `/icons/like.svg`}/></button>
                           <span>{post.likes} {post.likes === 1 ?  `like` : `likes`} </span>
                         </div>
 

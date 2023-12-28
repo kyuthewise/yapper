@@ -9,13 +9,13 @@ import mongoose from 'mongoose';
 import { connectMongoDB } from "@/app/lib/server";
 export const POST = async (req, res) => {
 
-  const googleServiceJson = JSON.parse(Buffer.from(process.env.GOOGLE_SERVICE_JSON, 'base64').toString());
+  const googleServiceJson = JSON.parse(Buffer.from(process.env.GOOGLE_SERVICE_JSON!, 'base64').toString());
 
 
   const storage = new Storage({
     credentials: googleServiceJson, // Path to your service account key file
   });
-  const bucket = storage.bucket(process.env.GCLOUD_STORAGE_BUCKET); // Your Google Cloud Storage bucket name
+  const bucket = storage.bucket(process.env.GCLOUD_STORAGE_BUCKET!); // Your Google Cloud Storage bucket name
 
   const formData = await req.formData();
 
@@ -44,7 +44,7 @@ export const POST = async (req, res) => {
       return new NextResponse(JSON.stringify({ error: "User not found" }), { status: 404 });
     }
 
-    await new Promise((resolve, reject) => {
+    await new Promise<void>((resolve, reject) => {
       const blobStream = blob.createWriteStream({ resumable: false });
 
       blobStream.on('error', err => {

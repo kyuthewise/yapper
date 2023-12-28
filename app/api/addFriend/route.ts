@@ -1,11 +1,10 @@
 import User from "@/app/models/user";
-import Post from "@/app/models/post";
 import { connectMongoDB } from "@/app/lib/server";
 import { NextResponse } from "next/server";
-import { comment } from "postcss";
 
 
-export async function POST(req, res){
+
+export async function POST(req: Request, res: Response){
 
 const {userid, adduserid} = await req.json()
 
@@ -25,7 +24,7 @@ if(userid != adduserid){
         return NextResponse.json({message: "User added successfuly"}, {status: 201})
 
     }
-    user.friends = user.friends.filter(id => id != userid)
+    user.friends = user.friends.filter((id:string) => id != userid)
     return NextResponse.json({message: "user unadded"}, {status: 201})
 
 }
