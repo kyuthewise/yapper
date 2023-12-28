@@ -5,11 +5,11 @@ import axios from "axios";
 import debounce from 'lodash.debounce';
 import DarkModeToggle from "../Feed/darkMode";
 import { SearchIcon, UserAddIcon, LogoutIcon } from '@heroicons/react/outline'; // Import icons
-const Navbar = () => {
+const Navbar = ({setEventTrigger, eventTrigger}) => {
   const { data: session } = useSession();
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState([]);
-  const userid = session?.user?.name
+  const userid = session?.user?.id
 
 
 
@@ -53,6 +53,9 @@ console.log('search results', searchResults)
       const response = await axios.post('/api/addFriend', {
         adduserid: addUserId,
         userid: userid
+
+
+    
       }, {
         headers: {
             'Content-Type': 'application/json'
@@ -60,6 +63,9 @@ console.log('search results', searchResults)
       
       })
       console.log(`srv response`, response.data);
+      if(response.status === 200 || response.status === 201){
+        setEventTrigger(!eventTrigger)
+      }
       } catch (error) {
       console.error('Error adding friend:', error);
 

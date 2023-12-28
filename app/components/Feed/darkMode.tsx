@@ -5,9 +5,9 @@ import { useSession } from 'next-auth/react';
 const DarkModeToggle = () => {
   const [darkMode, setDarkMode] = useState(Boolean);
   const {data:session} = useSession()
-  const userid = session?.user?.name
+  const userid = session?.user?.id
 
-
+console.log('dark', session?.user?.id)
   useEffect(() => {
     if (darkMode) {
       document.documentElement.classList.add('dark');
@@ -22,7 +22,6 @@ const DarkModeToggle = () => {
 
     const fetchData = async () => {
       
-console.log('fetchusr:', userid)
       try{
         if(userid){
 const response = await axios.get('/api/setDarkMode', {
@@ -50,7 +49,7 @@ console.log(response.data)
     setDarkMode(newDarkMode);
 
     try{
-    const response = axios.post('/api/setDarkMode', {
+    const response = await axios.post('/api/setDarkMode', {
       userid: userid
     },
     {

@@ -40,33 +40,32 @@ export const POST = async (req, res) => {
   try {
     await connectMongoDB();
     const user = await User.findOne({ name: userid }).exec();
+    if (!user) {
+      return new NextResponse(JSON.stringify({ error: "User not found" }), { status: 404 });
+    }
 
-    if (user) {
-      const blobStream = blob.createWriteStream({
-        resumable: false,
-      });
+    await new Promise((resolve, reject) => {
+      const blobStream = blob.createWriteStream({ resumable: false });
 
       blobStream.on('error', err => {
         console.error(err);
-        throw new Error('Google Cloud Storage error');
+        reject(new Error('Google Cloud Storage error'));
       });
 
       blobStream.on('finish', async () => {
-        // The public URL can be used to directly access the file via HTTP.
         const publicUrl = `https://storage.googleapis.com/${bucket.name}/${blob.name}`;
-        user.image = publicUrl; // Save the public URL instead of the filename
+        user.image = publicUrl;
         await user.save();
         console.log('Upload complete');
+        resolve();
       });
 
       blobStream.end(buffer);
+    });
 
-      return NextResponse.json({ error: "File sces" }, { status: 200 });
-    } else {
-      return NextResponse.json({ error: "usr not found" }, { status: 404 });
-    }
+    return new NextResponse(JSON.stringify({ message: "File uploaded successfully" }), { status: 200 });
   } catch (error) {
     console.error("Error occurred", error);
-    return NextResponse.json({ error: "faild to up" }, { status: 500 });
+    return new NextResponse(JSON.stringify({ error: "Failed to upload" }), { status: 500 });
   }
 };

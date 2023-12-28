@@ -6,19 +6,17 @@ import { comment } from "postcss";
 
 
 export async function POST(req, res){
-    const {postid, userid, comment} = await req.json()
-    const comments = []
+    const {postid, username, comment} = await req.json()
     try{
         await connectMongoDB()
     const post = await Post.findById(postid)
     const sendComment = {
-        user: userid,
+        user: username,
         text: comment
     }
     post.comments.push(sendComment)
     await post.save()
 
-    console.log(postid, userid, comment)
     }
     catch{
 

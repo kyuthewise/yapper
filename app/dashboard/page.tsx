@@ -8,7 +8,7 @@ import {BallTriangle} from 'react-loader-spinner';
 
 export default function Dashboard(){
     const [loading, setLoading] = useState(true);
-    
+    const [eventTrigger, setEventTrigger] = useState('false')
     useEffect(() => {
         setTimeout(() => {
           setLoading(false);
@@ -20,7 +20,7 @@ export default function Dashboard(){
 <div>
 
 <div className={loading ? 'hidden' : ''}>
-<Navbar></Navbar>
+<Navbar setEventTrigger={setEventTrigger} eventTrigger={eventTrigger}></Navbar>
 </div>
 
 {loading && (
@@ -39,7 +39,7 @@ export default function Dashboard(){
 <div className={`${loading ? 'hidden' : 'flex h-full bg-gray-300 dark:bg-gray-800 flex-col mt-20 items-center'}`}>
 
 
-<MainContent></MainContent>
+<MainContent setEventTrigger={setEventTrigger} eventTrigger={eventTrigger}></MainContent>
  </div> 
  </div>
     )}

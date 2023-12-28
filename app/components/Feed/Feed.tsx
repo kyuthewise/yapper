@@ -1,7 +1,7 @@
 import CreatePost from "./CreatePost";
 import GetPosts from "./FeedPosts";
 import { useState } from "react";
-const Feed = () => {
+const Feed = ({setEventTrigger, eventTrigger}) => {
 
     const [sharedData, setSharedData] = useState('');
 
@@ -11,8 +11,8 @@ const Feed = () => {
 
     return(
         <div className="h-full w-5/12 mt-10 absolute rounded-lg ">
-            <CreatePost onDataChange={handleDataChange} />
-            <GetPosts sharedData={sharedData}/>
+            <CreatePost onDataChange={handleDataChange} setEventTrigger={setEventTrigger} />
+            <GetPosts sharedData={sharedData} setEventTrigger={setEventTrigger} eventTrigger={eventTrigger}/>
         </div>
         
     )

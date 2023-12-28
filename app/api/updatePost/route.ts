@@ -1,9 +1,6 @@
 import { NextResponse } from "next/server"
-import User from "@/app/models/user"
 import { connectMongoDB } from "@/app/lib/server"
 import Post from "@/app/models/post";
-import path from "path";
-import { writeFile } from "fs/promises";
 import { Storage } from '@google-cloud/storage';
 
 export async function POST (req, res) {
@@ -16,8 +13,9 @@ export async function POST (req, res) {
 
     const formData = await req.formData();
         const file = formData.get("file")
-        const user = formData.get("user")
+        const user = formData.get("userid")
         const message = formData.get("message")
+        const username = formData.get("username")
 
 
         
@@ -61,7 +59,7 @@ export async function POST (req, res) {
             }
           }
         else{
-            const newPost = await Post.create({user, message})
+            const newPost = await Post.create({user:username, message})
             console.log(newPost);
         }
         return NextResponse.json({message: "Post published"}, {status: 201})

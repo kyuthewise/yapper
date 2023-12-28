@@ -2,7 +2,7 @@ import { useState } from "react"
 import { useSession } from "next-auth/react"
 import axios from "axios"
 
-const CreatePost = ({ onDataChange }) => {
+const CreatePost = ({ onDataChange, setEventTrigger }) => {
   const [message, setMessage] = useState('')
   const { data: session } = useSession();
   const [file, setFile] = useState(null)
@@ -12,7 +12,8 @@ const CreatePost = ({ onDataChange }) => {
     setFile(image)
   }
 
-  const user = session?.user?.name
+  const userid = session?.user?.id
+  const username = session?.user?.name
   const handleSubmit = async (e) => {
     e.preventDefault()
    
@@ -22,7 +23,8 @@ const CreatePost = ({ onDataChange }) => {
       if (file) {
         formData.append('file', file)
       }
-      formData.append('user', user)
+      formData.append('userid', userid)
+      formData.append('username', username)
       formData.append('message', message)
 
       const res = await axios.post('/api/updatePost', formData)

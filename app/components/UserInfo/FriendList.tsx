@@ -7,7 +7,7 @@ import Chat from "../Chat/chat";
 import { io } from "socket.io-client";
 import { useSession } from "next-auth/react";
 import { ChatAltIcon } from '@heroicons/react/outline';
-const FriendList = () => {
+const FriendList = (eventTrigger) => {
 
     const [userList, setUserList] = useState([])
     const {data:session} = useSession()
@@ -15,7 +15,7 @@ const FriendList = () => {
     const userid = session?.user?.name
 
 
-
+console.log('et:', eventTrigger)
 useEffect(() =>{
 
 const fetchData = async () =>{
@@ -38,7 +38,7 @@ catch(error){
 
 }
 fetchData()
-}, [userid])
+}, [userid, eventTrigger])
 
 useEffect(() => {
     const socket = io(process.env.NEXT_PUBLIC_SERVER_URL);

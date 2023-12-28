@@ -14,18 +14,14 @@ console.log(userid, adduserid)
     await connectMongoDB()
 
 if(userid != adduserid){
-    const user = await User.findOne({name:userid})
-    console.log('nice')
-    console.log(user)
+    const user = await User.findOne({_id:userid})
     if(!user.friends.includes(adduserid)){
-        console.log('nice')
+
         user.friends.push(adduserid)
-        console.log('nice')
-        console.log(user)
+
         user.markModified('friends');
         await user.save()
-        console.log('nice')
-        console.log('nice')
+
         return NextResponse.json({message: "User added successfuly"}, {status: 201})
 
     }

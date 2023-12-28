@@ -10,6 +10,7 @@ import Image from "next/image";
 import io from 'socket.io-client';
 import { profile } from "console";
 import { PencilIcon, CameraIcon } from '@heroicons/react/outline'; // Importing icons
+import { render } from "react-dom";
 export default function Comp({userid, currentUserId}){
   {
     
@@ -19,6 +20,7 @@ export default function Comp({userid, currentUserId}){
         const [image, setImage] = useState('')
         const [profileImage, setProfileImage] = useState('')
         const [imageUrl, setImageUrl] = useState('')
+        const [renderTrigger, setRenderTrigger] = useState(false)
         const [darkMode, setDarkMode] = useState(Boolean)
         const [userInfo, setUserInfo] = useState({
           Hobbies: '',
@@ -58,11 +60,11 @@ export default function Comp({userid, currentUserId}){
           console.error('Error fetching data:', error);
         }
       };
-  
+      
       fetchUserData();
-    }, [userid, image]);
+    }, [userid, renderTrigger]);
 
-
+console.log(renderTrigger)
   const imgurl = `/uploads/${profileImage}`
 
 
@@ -99,7 +101,13 @@ console.log('dm details', darkMode)
 
           // Assume '/api/upload' is your server endpoint for image upload
           const response = await axios.post(`/api/fileUpload`, formData)
-          setImage('')
+        
+          if (response.status === 200) {
+      
+            setRenderTrigger(!renderTrigger);
+            setImage('')
+          } 
+
         } 
         
         catch (error) {
@@ -178,8 +186,7 @@ console.log('dm details', darkMode)
       
                 <button className="w-full px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors duration-300 flex justify-center items-center" onClick={handleSubmit}>
                   Save Changes
-                </button>
-                                <p className="text-gray-700 dark:text-slate-300">About Me: <span className="text-gray-900 dark:text-slate-300 font-medium">{userInfo.Aboutme || 'Add About Me'}</span></p>
+                </button>               
               </div>
             ) : (
               

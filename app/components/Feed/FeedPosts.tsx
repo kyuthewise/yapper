@@ -11,7 +11,7 @@ import { format, parseISO } from 'date-fns';
 import Popup from "./popup";
 import DarkModeToggle from "./darkMode";
 
-const GetPosts = ({ sharedData, selectedUser}) => {
+const GetPosts = ({ sharedData, selectedUser, setEventTrigger, eventTrigger}) => {
 
   const router = useRouter();
   const [postList, setPostList] = useState([]);
@@ -25,10 +25,11 @@ const [likeTrigger, setLikeTrigger] = useState(false);
 const [postStates, setPostStates] = useState({});
 const [popup, setPopup] = useState({ show: false, message: '' });
 
- const userid = session?.user?.name
+ const userid = session?.user?.id
+ const username = session?.user?.name
 
 
-  const handleLike = async (postid) => {
+const handleLike = async (postid) => {
 
 
 try{
@@ -71,7 +72,7 @@ try{
     fetchData();
   }, [userid, sharedData]);
 
-
+console.log('etF', eventTrigger)
   useEffect(() => {
 
     const fetchData = async () => {
@@ -133,7 +134,7 @@ try{
 
   const response = await axios.post(`/api/setComment`, {
       postid: postid,
-      userid: userid,
+      username: username,
       comment: postStates[postid].comment
 
   }, {
@@ -167,7 +168,11 @@ const response = await axios.post('/api/addFriend', {
     }
 
 })
-showPopup('Friend added');
+
+if(response.status === 200 || response.status === 201){
+  showPopup('User followed!');
+  setEventTrigger(!eventTrigger)
+}
 }
 catch{
 
@@ -208,7 +213,6 @@ const hidePopup = () => {
 
 
 
-
   return (
     <div className="bg-gray-300 p-4 dark:bg-gray-800 dark:text-slate-300">
       <Popup message={popup.message} show={popup.show} onClose={hidePopup} />
@@ -232,10 +236,10 @@ const hidePopup = () => {
                             />
                             <span onClick={() => handlePostClick(post.user)} className="text-xl font-semibold cursor-pointer">{post.user}</span>
                           </div>
-                          {user.name !== userid && (
+                          {user.name !== username && (
                             <button className="text-indigo-500 hover:text-indigo-600" onClick={() => handleAddFriend(user.name)}><img className="h-6 w-6 dark:invert"src="/icons/addfriend.svg"/></button>
                           )}
-                          {userid === post.user && (
+                          {username === post.user && (
                             <button className="text-red-500 hover:text-red-600" onClick={() => handleDelete(post._id)}><img className="h-6 w-6 dark:invert dark:contrast-50" src="/icons/delete.svg"/></button>
                           )}
                         </div>
@@ -254,7 +258,7 @@ const hidePopup = () => {
 
                         {/* Likes Section */}
                         <div className="flex items-center mb-3">
-                          <button className="mr-2 text-indigo-500 hover:text-indigo-600" onClick={() => handleLike(post._id)}><img className="h-6 w-6 dark:brightness-200  dark:contrast-125"src={(post.likedBy.includes(userid) )|| (likeTrigger === post._id ) ? `/icons/liked.svg` : `/icons/like.svg`}/></button>
+                          <button className="mr-2 text-indigo-500 hover:text-indigo-600" onClick={() => handleLike(post._id)}><img className="h-6 w-6 dark:brightness-200  dark:contrast-125"src={(post.likedBy.includes(username) )|| (likeTrigger === post._id ) ? `/icons/liked.svg` : `/icons/like.svg`}/></button>
                           <span>{post.likes} {post.likes === 1 ?  `like` : `likes`} </span>
                         </div>
 

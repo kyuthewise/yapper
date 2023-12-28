@@ -4,6 +4,7 @@ import { io } from "socket.io-client";
 import axios from "axios";
 import User from "../../models/user";
 import { connectMongoDB } from "../../lib/server";
+import Popup from "../Feed/popup";
 const Chat = ({selectedUser, setSelectedUser}) => {
 
 
@@ -63,8 +64,14 @@ const handleCloseChat = () =>{
     const sendMessage = async (e) => {
         e.preventDefault()
        
+        if(message != ''){
         socket.emit('chat message', message, userid, selectedUser); 
-      
+        }
+        else{
+          console.log('empy msg')
+          return
+        }
+
         try{ 
           const res = await fetch('/api/setMessage',{
             

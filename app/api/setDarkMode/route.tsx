@@ -7,11 +7,12 @@ export async function GET(req, res) {
     
     const { searchParams} = new URL(req.url);
     const userid = searchParams.get('userid')
+
         try {
 
             await connectMongoDB(); 
           
-            const user = await User.findOne({name: userid}).exec()
+            const user = await User.findOne({_id:userid})
 
             if(!user){
                 console.log('User not found');
@@ -21,7 +22,7 @@ export async function GET(req, res) {
             return NextResponse.json({darkMode}, {status: 200})
      
         } catch (error) {
-            return NextResponse.json({message: 'cannot setdarkmode'}, {status: 404})
+            return NextResponse.json({error}, {status: 404})
             }
         }
 
@@ -34,7 +35,7 @@ export async function GET(req, res) {
         
                     await connectMongoDB(); 
                   
-                    const user = await User.findOne({name: userid})
+                    const user = await User.findOne({_id: userid})
                     user.DarkMode = !user.DarkMode
                     await user.save();
                     console.log('dark:')

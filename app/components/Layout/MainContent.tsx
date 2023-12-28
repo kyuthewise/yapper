@@ -1,18 +1,18 @@
 
-import { useSession } from "next-auth/react"
 import UserInfo from "../UserInfo/UserInfoLayout"
 import Feed from "../Feed/Feed"
+import { useState } from "react"
 import FriendList from "../UserInfo/FriendList"
-const MainContent = () =>{
-const {data:session} = useSession()
+const MainContent = ({eventTrigger, setEventTrigger}) =>{
+
 return(
 <div className="h-screen bg-gray-300 flex flex-row justify-center dark:bg-gray-800"> 
 
 <div className="h-screen bg-gray-300 flex flex-row justify-center ">
-<UserInfo/>
-<Feed/>
+<UserInfo />
+<Feed setEventTrigger={setEventTrigger} eventTrigger={eventTrigger}/>
 
-<FriendList/>
+<FriendList eventTrigger={eventTrigger}/>
 </div>
 </div>
 

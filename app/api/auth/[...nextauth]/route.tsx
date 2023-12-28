@@ -19,7 +19,7 @@ export const authOptions = {
                 try{
                     await connectMongoDB();
                     const user = await User.findOne({ name })
-
+                    console.log('usrses: ', user)
                     if(!user){
                         return null;
                     }
@@ -59,7 +59,7 @@ console.log("error: ", error)
                     existingUser = await User.create({
                         name: user.name,
                         email: user.email,
-                        image: user.image,
+                        image: user.image, 
                         // Add other fields as necessary
                     });
                 }
@@ -72,7 +72,26 @@ console.log("error: ", error)
                 const passwordMatch = await bcrypt.compare(credentials.password, foundUser.password);
                 return passwordMatch; // Return true if password matches, false otherwise
             }
+        }, 
+        async jwt({ token, user }) {
+            // When user signs in, add their MongoDB _id to the JWT token
+            if (user) {
+                token.userId = user._id;  // Add the MongoDB _id
+            }
+            return token;
         },
+
+        async session({ session, token }) {
+            console.log(token)
+            // Use the token to set the user's _id in the session
+            if (token && token.userId) {
+                session.user.id = token.userId;  // Transfer the _id to the session
+            }
+            console.log('ses:', session);
+            return session;
+        },
+        
+        
         // ... other callbacks
     },
 };
