@@ -1,16 +1,10 @@
 "use client";
 
-import { connectMongoDB } from "@/app/lib/server";
-import User from "@/app/models/user";
-import { signOut } from "next-auth/react"
+
 import { useSession } from "next-auth/react";
 import { useState, useEffect, useRef } from "react";
 import axios from "axios";
-import Image from "next/image";
-import io from 'socket.io-client';
-import { profile } from "console";
 import { PencilIcon, CameraIcon } from '@heroicons/react/outline'; // Importing icons
-import { render } from "react-dom";
 export default function Comp({userid, currentUserId}){
   {
     
