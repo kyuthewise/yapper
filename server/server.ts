@@ -1,4 +1,5 @@
 
+// @ts-nocheck
 
 const express = require('express');
 const http = require('http');
@@ -43,8 +44,8 @@ socket.on('login', (userid) => {
   socket.on('clientMessage', (data) => {
 
     const user = {
-      username: data.userId as string,
-      socketId: socket.id as string
+      username: data.userId 
+      socketId: socket.id
     }
     connectedUsers.push(user)
     

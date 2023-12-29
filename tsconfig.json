@@ -41,7 +41,7 @@
     "server/server.ts",
     "app/components/pusher.tsx",
     "app/components/UserInfo/UserInfoLayout.tsx"
-  ],
+, "app/utils/authOptions.ts"  ],
   "exclude": [
     "node_modules"
   ]

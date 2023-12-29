@@ -8,13 +8,20 @@ export type Post = {
     createdAt: string;
     message: string;
   };
-  
+  import { User as NextAuthUser } from "next-auth";
   export type Userface = {
     _id: string;
     name: string;
     image?: string;
   };
-  
+
+  export interface ExtendedUser {
+    id: string;
+    name?: string | null;
+    email?: string | null;
+    image?: string | null;
+
+  }
   export type Comment = {
     _id: string;
     user: string;
@@ -47,7 +54,8 @@ export type Messageface ={
   message:string
 
 }
-  export interface Credentials {
-    name: string;
-    password: string;
-  }
+export type Credentials = Record<string, string> & {
+  name: string;
+  password: string;
+  // Any other fields you need
+};
