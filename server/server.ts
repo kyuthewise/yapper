@@ -44,7 +44,7 @@ socket.on('login', (userid) => {
   socket.on('clientMessage', (data) => {
 
     const user = {
-      username: data.userId 
+      username: data.userId,
       socketId: socket.id
     }
     connectedUsers.push(user)
