@@ -24,14 +24,29 @@ export interface UserInfoProps {
     userid?: string; // or the specific type for userid
     currentUserId?: string; // or the specific type for currentUserId
   };
-
+export interface NavbarProps {
+    setEventTrigger?: (value: boolean) => void;
+    eventTrigger?: boolean;
+  }
+  
 export interface GetPostsProps {
-    sharedData: any; // Define the type based on what sharedData is
+    sharedData: string
     selectedUser: string;
     setEventTrigger: (value: boolean) => void;
     eventTrigger: boolean;
   };
+export interface GetProfileProps{
+  sharedData?: string
+  selectedUser: string;
+  setEventTrigger?: (value: boolean) => void;
+  eventTrigger?: boolean;
+}
+export type Messageface ={
+  _id: string,
+  userid: string,
+  message:string
 
+}
   export interface Credentials {
     name: string;
     password: string;

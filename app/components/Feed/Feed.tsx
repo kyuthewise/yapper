@@ -12,7 +12,7 @@ const Feed = ({setEventTrigger, eventTrigger}) => {
     return(
         <div className="h-full w-5/12 mt-10 absolute rounded-lg ">
             <CreatePost onDataChange={handleDataChange} setEventTrigger={setEventTrigger} />
-            <GetPosts sharedData={sharedData} setEventTrigger={setEventTrigger} eventTrigger={eventTrigger}/>
+            <GetPosts sharedData={sharedData} setEventTrigger={setEventTrigger} eventTrigger={eventTrigger} selectedUser={""}/>
         </div>
         
     )

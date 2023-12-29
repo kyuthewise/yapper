@@ -6,8 +6,9 @@ import debounce from 'lodash.debounce';
 import DarkModeToggle from "../Feed/darkMode";
 import { SearchIcon, UserAddIcon, LogoutIcon } from '@heroicons/react/outline'; // Import icons
 import { Userface} from "@/app/types/types";
+import { NavbarProps } from "@/app/types/types";
 
-const Navbar = ({setEventTrigger, eventTrigger}) => {
+const Navbar:React.FC<NavbarProps> = ({setEventTrigger, eventTrigger}) => {
   const { data: session } = useSession();
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState<Userface[]>([]);
@@ -66,7 +67,9 @@ console.log('search results', searchResults)
       })
       console.log(`srv response`, response.data);
       if(response.status === 200 || response.status === 201){
+        if(setEventTrigger){
         setEventTrigger(!eventTrigger)
+        }
       }
       } catch (error) {
       console.error('Error adding friend:', error);

@@ -2,9 +2,7 @@ import { useSession } from "next-auth/react";
 import { useState, useEffect, useRef } from "react";
 import { io } from "socket.io-client";
 import axios from "axios";
-import User from "../../models/user";
-import { connectMongoDB } from "../../lib/server";
-import Popup from "../Feed/popup";
+import { Messageface } from "@/app/types/types";
 const Chat = ({selectedUser, setSelectedUser}) => {
 
 
@@ -12,14 +10,15 @@ const {data:session} = useSession()
 const [message, setMessage] = useState('')
 const [socket, setSocket] = useState<any>()
 const userid = session?.user?.name
-const [messages, setMessages] = useState([]);
+const [messages, setMessages] = useState<Messageface[]>([]);
 const [loading, setLoading] = useState(true);
 const [userPfp, setUserPfp] = useState('')
 const [openChat, setOpenChat] = useState(true)
-const messagesContainerRef = useRef(null); 
+const messagesContainerRef = useRef<HTMLDivElement>(null); 
+
 
 useEffect(() => {
-    const socket = io(process.env.NEXT_PUBLIC_SERVER_URL);
+    const socket = io(process.env.NEXT_PUBLIC_SERVER_URL!);
     const audio = new Audio('/audio/bubblepop.wav')
     
     audio.volume = 0.2

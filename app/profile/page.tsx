@@ -3,20 +3,30 @@
 import Navbar from "../components/Layout/Navbar";
 import { useRouter } from 'next/navigation';
 import UserInfo from "../components/UserInfo/UserInfoLayout";
-import { useSearchParams } from "next/navigation";
-import Comp from "../components/UserInfo/UserDetails";
 
 import GetPosts from "../components/Feed/FeedPosts";
-import Feed from "../components/Feed/Feed";
+import { useSearchParams } from "next/navigation";
 import { useSession } from "next-auth/react";
+import { useState, useEffect} from "react";
 
 export default function Profile(){
-
+    const [userid, setUserId] = useState('')
     const searchParams = useSearchParams()
-    const router = useRouter();
+
+    useEffect(() => {
+        // Only update userid state if searchParams is not null
+        if (searchParams) {
+          // Use an empty string as a fallback when the parameter is not present
+          const userIdParam = searchParams.get('userid') || '';
+          setUserId(userIdParam);
+        }
+      }, [searchParams]);
+    
+    
     const { data: session } = useSession();
-    const currentUserId = session?.user?.name;
-    const userid = searchParams.get('userid')
+    const currentUserId = session?.user?.name as string;
+
+    
     console.log(userid, currentUserId)
     return (
        <div>
@@ -29,7 +39,9 @@ export default function Profile(){
      <UserInfo userid={userid} currentUserId={currentUserId}/>
      </div>
      <div className="w-2/6 mt-10">
-        <GetPosts selectedUser={userid} />
+        <GetPosts selectedUser={userid} sharedData={""} setEventTrigger={function (value: boolean): void {
+                        throw new Error("Function not implemented.");
+                    } } eventTrigger={false} />
      </div>
 
 

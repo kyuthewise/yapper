@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import Create from 'next-connect';
+
 
 export const connectMongoDB = async () =>{
     try{

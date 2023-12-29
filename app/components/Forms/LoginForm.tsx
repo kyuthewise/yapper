@@ -19,7 +19,8 @@ export default function LoginForm() {
       const res = await signIn('credentials', {
         name, password
       });
-      if (res.error) {
+       
+      if (res && res.error) {
         setError('Invalid credentials');
         return;
       }

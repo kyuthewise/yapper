@@ -1,3 +1,5 @@
+
+
 const express = require('express');
 const http = require('http');
 const socketIO = require('socket.io');
@@ -41,8 +43,8 @@ socket.on('login', (userid) => {
   socket.on('clientMessage', (data) => {
 
     const user = {
-      username: data.userId,
-      socketId: socket.id
+      username: data.userId as string,
+      socketId: socket.id as string
     }
     connectedUsers.push(user)
     

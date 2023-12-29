@@ -8,7 +8,7 @@ import {BallTriangle} from 'react-loader-spinner';
 
 export default function Dashboard(){
     const [loading, setLoading] = useState(true);
-    const [eventTrigger, setEventTrigger] = useState('false')
+    const [eventTrigger, setEventTrigger] = useState(false)
     useEffect(() => {
         setTimeout(() => {
           setLoading(false);

@@ -12,8 +12,8 @@ const CreatePost = ({ onDataChange, setEventTrigger }) => {
     setFile(image)
   }
 
-  const userid = session?.user?.id
-  const username = session?.user?.name
+  const userid = session?.user?.id as string
+  const username = session?.user?.name as string
   const handleSubmit = async (e) => {
     e.preventDefault()
    

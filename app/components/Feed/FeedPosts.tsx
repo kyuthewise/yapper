@@ -13,7 +13,7 @@ import DarkModeToggle from "./darkMode";
 import { Post,Userface,Comment,GetPostsProps } from "@/app/types/types";
 
 
-const GetPosts = ({ sharedData, selectedUser, setEventTrigger, eventTrigger}) => {
+const GetPosts:React.FC<GetPostsProps> = ({ sharedData, selectedUser, setEventTrigger, eventTrigger}) => {
 
   const router = useRouter();
   const [postList, setPostList] = useState<Post[]>([]);
