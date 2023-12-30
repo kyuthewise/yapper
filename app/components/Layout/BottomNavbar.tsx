@@ -12,7 +12,7 @@ const BottomNavbar = ({ toggleUserInfo, toggleFriendList}) => {
         <UsersIcon className="h-6 w-6 text-gray-700 dark:text-gray-300" />
         <span className="text-xs text-gray-700 dark:text-gray-300">Friends</span>
       </button>
-      <Link href=""> </Link>
+      <Link href="">Home</Link>
     </div>
   );
 };
