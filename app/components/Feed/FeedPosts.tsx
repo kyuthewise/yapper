@@ -14,7 +14,7 @@ import { Post,Userface,Comment,GetPostsProps } from "@/app/types/types";
 import FriendList from "../UserInfo/FriendList";
 
 
-const GetPosts = ({ sharedData, selectedUser, setEventTrigger, eventTrigger, showFriendList}) => {
+const GetPosts:React.FC<GetPostsProps> = ({ sharedData, selectedUser, setEventTrigger, eventTrigger, showFriendList}) => {
 
   const router = useRouter();
   const [postList, setPostList] = useState<Post[]>([]);

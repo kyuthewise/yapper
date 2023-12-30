@@ -30,7 +30,7 @@ export type Post = {
 export interface UserInfoProps {
     userid?: string; 
     currentUserId?: string; 
-    showUserInfo: boolean
+    showUserInfo?: boolean
   };
 export interface NavbarProps {
     setEventTrigger?: (value: boolean) => void;
@@ -42,6 +42,7 @@ export interface GetPostsProps {
     selectedUser: string;
     setEventTrigger: (value: boolean) => void;
     eventTrigger: boolean;
+    showFriendList?: boolean;
   };
 export interface GetProfileProps{
   sharedData?: string
