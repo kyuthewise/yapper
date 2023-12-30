@@ -205,7 +205,7 @@ console.log('dm details', darkMode)
               </div>
             )}
           </div>
-          <div className="xl:hidden mt-48">
+          <div className="xl:hidden mt-12">
           <DarkModeToggle/>
           <button 
           
