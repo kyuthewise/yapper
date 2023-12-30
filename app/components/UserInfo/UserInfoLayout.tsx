@@ -11,10 +11,10 @@ const {data:session} = useSession()
 const currentUserid = userid || session?.user?.name;
   
 
-console.log(showUserInfo)
+
 
   return(
-  <div className={`${showUserInfo ? 'inline-flex flex justify-center  ' : 'hidden'} mt-20 lg:mt-0 bg-white h-screen w-screen xl:h-5/6 z-10 xl:inline-flex fixed left-0 xl:w-96 xl:mt-10 xl:mb-10 rounded-lg xl:ml-10 dark:bg-gray-900`}>
+  <div className={`${showUserInfo ? 'inline-flex flex justify-center  ' : 'hidden'} mt-20 lg:mt-0 bg-white  h-screen w-screen xl:h-5/6 z-10 xl:inline-flex fixed left-0 xl:w-96 xl:mt-10 xl:mb-10 rounded-lg xl:ml-10 dark:bg-gray-900`}>
     <Comp userid={currentUserid} currentUserId={currentUserId}></Comp>
   </div>
     

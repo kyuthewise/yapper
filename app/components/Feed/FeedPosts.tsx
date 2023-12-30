@@ -4,7 +4,7 @@ import { useSession } from "next-auth/react";
 import axios from "axios";
 import Image from "next/image";
 import './post.css';
-import { io } from "socket.io-client";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { isImageFile, isVideoFile } from "./FileUtils";
 import { format, parseISO } from 'date-fns';
@@ -24,6 +24,7 @@ const GetPosts:React.FC<GetPostsProps> = ({ sharedData, selectedUser, setEventTr
 const [likeTrigger, setLikeTrigger] = useState(false);
 const [postStates, setPostStates] = useState({});
 const [popup, setPopup] = useState({ show: false, message: '' });
+const [showUserComment, setShowUserComment] = useState(false)
 
  const userid = session?.user?.id as string
  const username = session?.user?.name as string
@@ -78,7 +79,7 @@ try{
     }
   }, [selectedUser])
 
-console.log('etF', eventTrigger)
+
   useEffect(() => {
 
     const fetchData = async () => {
@@ -89,7 +90,7 @@ console.log('etF', eventTrigger)
         
   
         setPostList(response.data.items);
-        
+    
      
       } catch (error) {
         console.log('error fetching postlist', error);
@@ -104,14 +105,19 @@ console.log('etF', eventTrigger)
     fetchData();
   }, [likeTrigger, sharedData, userid]);
 
-  
   useEffect(() => {
     const initialStates = {};
     postList.forEach((post) => {
-      initialStates[post._id] = { comment: '', commentHidden: true };
+      // Check if any of the comments in the post belong to the current user
+      const hasUserComment = post.comments.some(comment => comment.user === username);
+      // If the user has commented, initially show the comments
+      initialStates[post._id] = { comment: '', commentHidden: !hasUserComment };
     });
     setPostStates(initialStates);
-  }, [postList]);
+  }, [postList, userid, likeTrigger, eventTrigger]);
+
+  
+
   const imageurl = `/uploads/`;
   const posturl = '/post/';
 
@@ -132,11 +138,11 @@ showPopup('Post deleted');
 setLikeTrigger(!likeTrigger)
   }
 
-console.log('ul', userList)
-console.log('pl', postList)
+
 
 
   const handleComment = async (postid) =>{
+
 
 
 try{
@@ -144,7 +150,11 @@ try{
   const response = await axios.post(`/api/setComment`, {
       postid: postid,
       username: username,
+      userid: userid,
       comment: postStates[postid].comment
+
+
+      
 
   }, {
       headers: {
@@ -155,6 +165,9 @@ try{
   )
 
   setLikeTrigger(!likeTrigger)
+  if (response.status === 200 || response.status === 201){
+    setShowUserComment(true)
+  }
 
 }
 
@@ -193,7 +206,6 @@ router.push(`/profile?userid=${userid}`);
 
 }
 
-
 useEffect(() =>{
   if(selectedUser){
     setShowAllPosts(false)
@@ -219,12 +231,10 @@ const showPopup = (message:string) => {
 const hidePopup = () => {
   setPopup({ show: false, message: '' });
 };
-console.log(showFriendList)
-console.log(selectedUser)
-console.log(showAllPosts)
-
+console.log(postStates)
+console.log(postList)
   return (
-    <div className={`${showFriendList === true ? `hidden` : `mt-20 lg:mt-0 p-2 md:p-4 lg:p-6 bg-gray-300 dark:bg-gray-800 dark:text-slate-300`} `}>
+    <div className={`${showFriendList === true ? `hidden` : `mt-20 ${selectedUser ? `lg:mt-12` : 'lg:mt-0'} p-2 md:p-4 lg:p-6 bg-gray-300 dark:bg-gray-800 dark:text-slate-300`} `}>
     <Popup message={popup.message} show={popup.show} onClose={hidePopup} />
     <ul className="space-y-3 md:space-y-4 lg:space-y-6">
         {postList.slice().reverse().map((post) => {
@@ -291,10 +301,16 @@ console.log(showAllPosts)
 </button>
 
 
-                          <ul className={`list-none p-0 ${postState.commentHidden ? 'hidden' : ''}`}>
+                          <ul className={`list-none p-0 `}>
                             {post.comments.slice().reverse().map((comment) => (
-                              <li key={comment._id} className="flex items-center mb-1">
-                                <span className="font-bold mr-1">{comment.user}:</span>
+                              <li key={comment._id} className={`flex items-center mb-1 ${(postState.commentHidden  || !showUserComment) ? 'hidden' : ''}`}>
+                                <Link href={`/profile?userid=${comment.user}`}>
+                                <div className="flex justify-center items-center">
+
+                                {comment.image &&(
+                                <img src={comment.image} className="h-8 w-8 object-cover rounded-full"></img> )}
+                                <span className="font-bold mr-1 ml-2">{comment.user}:</span>
+                                </div> </Link>
                                 <span>{comment.text}</span>
                               </li>
                             ))}

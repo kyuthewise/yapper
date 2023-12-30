@@ -7,7 +7,7 @@ import axios from "axios";
 import { PencilIcon, CameraIcon } from '@heroicons/react/outline'; // Importing icons
 import DarkModeToggle from "../Feed/darkMode";
 import { SearchIcon, UserAddIcon, LogoutIcon } from '@heroicons/react/outline';
-
+import Link from "next/link";
 export default function Comp({userid, currentUserId}){
   {
     
@@ -37,7 +37,7 @@ export default function Comp({userid, currentUserId}){
         const file = e.target.files[0];
         setImage(file)
     }
-
+console.log(userid, currentUserId)
     useEffect(() => {
       if (!userid) return;
   
@@ -63,7 +63,7 @@ export default function Comp({userid, currentUserId}){
       fetchUserData();
     }, [userid, renderTrigger]);
 
-console.log(renderTrigger)
+
   const imgurl = `/uploads/${profileImage}`
 
 
@@ -90,7 +90,7 @@ setIsEditMode(false)
     catch{
     }
   };
-console.log('dm details', darkMode)
+
     const handleImageUpload = async () => {
         try {
           if(!image) return;
@@ -116,7 +116,7 @@ console.log('dm details', darkMode)
  
         
       return (
-        <div className="bg-gray-50 rounded-lg w-full max-w-sm p-5 mt-20 lg:mt-10 2xl:block flex flex-col items-center shadow-lg dark:bg-gray-900 dark:text-slate-300 h-96">
+        <div className=" rounded-lg w-full  h-5/6 max-w-sm p-5 mt-20 lg:mt-10 2xl:block flex flex-col items-center  dark:bg-gray-900 dark:text-slate-300 h-96">
           
           <div className="flex flex-col items-center">
             
@@ -127,6 +127,8 @@ console.log('dm details', darkMode)
                 alt="Profile"
                 className="object-cover w-full h-full "
               />
+              {(!currentUserId) ? (
+                <>
               <div className="absolute inset-0 flex justify-center items-center bg-black bg-opacity-50 hover:bg-opacity-60 opacity-0 hover:opacity-100 transition-opacity duration-300">
                 <CameraIcon className="h-8 w-8 text-white" />
               </div>
@@ -136,6 +138,8 @@ console.log('dm details', darkMode)
                 className="hidden"
                 onChange={handleImageChange}
               />
+              </>
+              ): null }
             </label>
     
             {image && (
@@ -145,7 +149,7 @@ console.log('dm details', darkMode)
             )}
           </div>
     
-          <div className="text-2xl font-semibold mb-4 text-center">{userid}</div>
+          <div className="text-2xl font-semibold mb-4 text-center"><Link href={`/profile?userid=${userid}`}>{userid}</Link></div>
               
           <div className="h-full w-full ">
             {isEditMode ? (
@@ -190,13 +194,13 @@ console.log('dm details', darkMode)
             ) : (
               
               <div className="space-y-3 h-full" >
-                <div className=""> <p className="text-gray-700 text-center dark:text-slate-300">About Me: <span className="text-gray-900 dark:text-slate-300 font-medium">{userInfo.Aboutme || 'Add About Me'}</span></p></div>
+                <div className=""> <p className="text-gray-700 text-center dark:text-slate-300">About Me: <span className="text-gray-900 dark:text-slate-300 font-medium">{userInfo.Aboutme || ((currentUserId && currentUserId === userid) ? 'Add about me' : 'None selected')}</span></p></div>
                 <div className="mt-10">
-                <p className="text-gray-700 dark:text-slate-300">Location: <span className="text-gray-900 dark:text-slate-300 font-medium">{userInfo.Location || 'Add Location'}</span></p>
-                <p className="text-gray-700 dark:text-slate-300">Hobbies: <span className=" dark:text-slate-300 text-gray-900 font-medium">{userInfo.Hobbies || 'Add Hobbies'}</span></p>
-                <p className="text-gray-700 dark:text-slate-300">Education: <span className="text-gray-900 dark:text-slate-300 font-medium">{userInfo.Education || 'Add Education'}</span></p>
+                <p className="mt-12 text-gray-700 dark:text-slate-300">Location: <span className="text-gray-900 dark:text-slate-300 font-medium">{userInfo.Location || ((currentUserId && currentUserId === userid) ? 'Add location' : 'None selected')}</span></p>
+                <p className="text-gray-700 dark:text-slate-300">Hobbies: <span className=" dark:text-slate-300 text-gray-900 font-medium">{userInfo.Hobbies || ((currentUserId && currentUserId === userid) ? 'Add hobbies' : 'None selected')}</span></p>
+                <p className="text-gray-700 dark:text-slate-300">Education: <span className="text-gray-900 dark:text-slate-300 font-medium">{userInfo.Education || ((currentUserId && currentUserId === userid) ? 'Add Education' : 'None selected')}</span></p>
                 {(!currentUserId || !userid || userid === currentUserId) && (
-                  <button className="w-full px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors duration-300 flex justify-center items-center" onClick={() => setIsEditMode(true)}>
+                  <button className="w-full mt-8 px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors duration-300 flex justify-center items-center" onClick={() => setIsEditMode(true)}>
                     <PencilIcon className="h-5 w-5 mr-2" /> Edit Info
                   </button>
                   

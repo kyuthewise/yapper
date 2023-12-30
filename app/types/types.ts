@@ -26,6 +26,7 @@ export type Post = {
     _id: string;
     user: string;
     text: string;
+    image: string;
   };
 export interface UserInfoProps {
     userid?: string; 

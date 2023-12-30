@@ -25,7 +25,8 @@ return(
 <UserInfo showUserInfo={showUserInfo}/>
 <Feed showCreatePost={showCreatePost} setShowCreatePost={setShowCreatePost} showFriendList={showFriendList} setEventTrigger={setEventTrigger} eventTrigger={eventTrigger}/>
 <FriendList showFriendList={showFriendList} eventTrigger={eventTrigger}/>
- <BottomNavbar 
+ <BottomNavbar
+            setDisableInterface={setDisableInterface}
         toggleUserInfo={() => {setShowUserInfo(!showUserInfo); setShowFriendList(false); setShowCreatePost(false)}} 
         toggleFriendList={() => {setShowFriendList(!showFriendList); setShowUserInfo(false); setShowCreatePost(false) }}
 

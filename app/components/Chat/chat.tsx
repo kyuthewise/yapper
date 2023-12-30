@@ -2,6 +2,7 @@ import { useSession } from "next-auth/react";
 import { useState, useEffect, useRef } from "react";
 import { io } from "socket.io-client";
 import axios from "axios";
+import Link from "next/link";
 import { Messageface } from "@/app/types/types";
 const Chat = ({selectedUser, setSelectedUser}) => {
 
@@ -117,13 +118,15 @@ const handleCloseChat = () =>{
 
 
 const imgurl = `/uploads/`
+const toggleLink = () => {
 
+}
 return openChat ? (
   <div className="fixed z-10 bg-white lg:inset dark:bg-slate-700 lg:w-96 lg:bottom-0 lg:mb-4 lg:mr-4 rounded-lg shadow-lg flex flex-col">
     <div className="flex items-center justify-between p-3 border-b border-gray-200 dark:border-gray-600">
       <div className="flex items-center">
-        <img className="w-10 h-10 object-cover rounded-full mr-3" src={userPfp ? userPfp : `/uploads/defaultimg.svg`} alt={selectedUser} />
-        <p className="text-lg font-medium dark:text-slate-300">{selectedUser}</p>
+        <Link href={`/profile?userid=${selectedUser}`}><img className="w-10 h-10 object-cover rounded-full mr-3" src={userPfp ? userPfp : `/uploads/defaultimg.svg`} alt={selectedUser} /></Link>
+        <p className="text-lg font-medium dark:text-slate-300"><Link href={`/profile?userid=${selectedUser}`}>{selectedUser}</Link></p>
       </div>
       <button className="text-gray-600 hover:text-gray-800 dark:text-slate-300 dark:hover:text-white" onClick={() => setSelectedUser('')}>&times;</button>
     </div>

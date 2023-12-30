@@ -25,7 +25,8 @@ const postSchema = new Schema({
     comments: [
         {
             user: String,
-            text: String
+            text: String,
+            image: String
         }
     ]
 

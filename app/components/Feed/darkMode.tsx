@@ -7,7 +7,7 @@ const DarkModeToggle = () => {
   const {data:session} = useSession()
   const userid = session?.user?.id
 
-console.log('dark', session?.user?.id)
+
   useEffect(() => {
     if (darkMode) {
       document.documentElement.classList.add('dark');
@@ -29,7 +29,7 @@ const response = await axios.get('/api/setDarkMode', {
   
 })
 setDarkMode(response.data.darkMode)
-console.log(response.data)
+
         }
 
 
@@ -58,14 +58,14 @@ console.log(response.data)
         }
       }
       )
-      console.log('drkmdresp: ', response.data)
+
     }
     catch(error){
       console.log('error setting darkmode, error')
     }
     
   };
-  console.log(darkMode)
+
   return (
     <button 
       onClick={toggleDarkMode}

@@ -1,21 +1,19 @@
 import Link from "next/link";
-import { useState, useCallback, useEffect } from "react";
+import { useState, useCallback, useEffect, useRef } from "react";
 import { signOut, useSession } from "next-auth/react";
 import axios from "axios";
 import debounce from 'lodash.debounce';
 import DarkModeToggle from "../Feed/darkMode";
-import { SearchIcon, UserAddIcon, LogoutIcon } from '@heroicons/react/outline'; // Import icons
-import { Userface} from "@/app/types/types";
+import { SearchIcon, UserAddIcon, LogoutIcon } from '@heroicons/react/outline';
+import { Userface } from "@/app/types/types";
 import { NavbarProps } from "@/app/types/types";
 
-const Navbar:React.FC<NavbarProps> = ({setEventTrigger, eventTrigger, disableInterface, setDisableInterface}) => {
+const Navbar: React.FC<NavbarProps> = ({ setEventTrigger, eventTrigger, disableInterface, setDisableInterface }) => {
   const { data: session } = useSession();
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState<Userface[]>([]);
-  const userid = session?.user?.id
-
-
-
+  const userid = session?.user?.id;
+  const searchBarRef = useRef<HTMLDivElement>(null); // Reference for the search bar
 
   const debouncedSearch = useCallback(
     debounce(async (term: string) => {
@@ -27,8 +25,6 @@ const Navbar:React.FC<NavbarProps> = ({setEventTrigger, eventTrigger, disableInt
       try {
         const response = await axios.get(`/api/userSearch`, { params: { term } });
         setSearchResults(response.data.users);
-        console.log('search response', response)
-
       } catch (error) {
         console.error('Error during search:', error);
         setSearchResults([]);
@@ -36,7 +32,23 @@ const Navbar:React.FC<NavbarProps> = ({setEventTrigger, eventTrigger, disableInt
     }, 500),
     []
   );
-console.log('search results', searchResults)
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (searchBarRef.current && !searchBarRef.current.contains(event.target)) {
+        setSearchResults([]); // Clears the search results if clicked outside
+      }
+    };
+
+    // Add click event listener
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      // Cleanup the event listener
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [searchBarRef]);
+
   useEffect(() => {
     return () => {
       debouncedSearch.cancel();
@@ -47,44 +59,37 @@ console.log('search results', searchResults)
     const term: string = e.target.value;
     setSearchTerm(term);
     debouncedSearch(term);
-    console.log('term:',term)
   };
 
   const handleAddFriend = async (addUserId: String) => {
-    try{
-  
+    try {
       const response = await axios.post('/api/addFriend', {
         adduserid: addUserId,
         userid: userid
-
-
-    
       }, {
         headers: {
-            'Content-Type': 'application/json'
-          }
-      
-      })
-      console.log(`srv response`, response.data);
-      if(response.status === 200 || response.status === 201){
-        if(setEventTrigger){
-        setEventTrigger(!eventTrigger)
+          'Content-Type': 'application/json'
+        }
+      });
+
+      if (response.status === 200 || response.status === 201) {
+        if (setEventTrigger) {
+          setEventTrigger(!eventTrigger);
         }
       }
-      } catch (error) {
+    } catch (error) {
       console.error('Error adding friend:', error);
-
     }
   };
+
   const handleClick = () => {
-    if(setDisableInterface){
-    setDisableInterface(true);
+    if (setDisableInterface) {
+      setDisableInterface(true);
     }
-    // Any other actions you want to perform
-  }
+  };
   return (
-<nav className=" bg-white shadow-lg fixed top-0 z-30 dark:text-slate-300 dark:bg-gray-900 w-full">
-  <div className="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center">
+    <nav className="bg-white shadow-lg fixed top-0 z-30 dark:text-slate-300 dark:bg-gray-900 w-full">
+    <div className="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center">
     {/* Logo and Home Link */}
     <div className="flex items-center space-x-6"> {/* Increased space */}
       <Link href="/dashboard">
@@ -92,15 +97,17 @@ console.log('search results', searchResults)
           <img className="h-20 w-20 brightness-75 drop-shadow-lg dark:contrast-125" src="/icons/logopurplenth.svg" />
         </p>
       </Link>
+
       <Link href="/dashboard" onClick={handleClick}>
-        <p className="text-gray-700 text-md hover:text-gray-500 cursor-pointer dark:text-slate-300">
+        <p className="text-gray-700 text-md hover:text-gray-500 cursor-pointer dark:text-slate-300 hidden lg:inline">
           Home
         </p>
       </Link>
+     
     </div>
 
     {/* Search Bar */}
-    <div className="lg:relative flex-grow mx-4 ">
+    <div className="lg:relative flex-grow mx-4" ref={searchBarRef}>
       <div className="flex items-center rounded-full bg-gray-100 px-5 py-3 dark:bg-gray-700"> {/* Increased padding */}
         <SearchIcon className="h-5 w-5 text-gray-500 mr-3" /> {/* Added margin */}
         <input 
@@ -115,8 +122,13 @@ console.log('search results', searchResults)
       {searchResults && searchResults.length > 0 && (
         <div className="mt-10 absolute left-0 lg:top-full  right-0 bg-white dark:bg-gray-700 p-3 shadow-md mt-1 rounded z-10">
           {searchResults.map((user) => (
-            <div key={user._id} className="p-3 hover:bg-gray-100 rounded-lg dark:hover:bg-gray-500 flex justify-between items-center space-x-3"> {/* Increased padding and space */}
-              <span>{user.name}</span>
+            
+      <div key={user._id} className="p-3 hover:bg-gray-100 rounded-lg dark:hover:bg-gray-500 flex justify-between items-center space-x-3"> {/* Increased padding and space */}
+              <Link href={`profile?userid=${user.name}`}>
+              <div className="flex flex-column justify-center items-center">
+              <img src={user.image} className="w-10 h-10 object-cover rounded-full"></img>
+              <span className="ml-2">{user.name}</span> </div> </Link>
+              
               <div className="flex space-x-2"> {/* Added space between buttons */}
                 <Link href={`/profile?userid=${user.name}`}>
                   <p className="text-sm bg-blue-500 hover:bg-blue-600 text-white py-1 px-2 rounded cursor-pointer w-24">View Profile</p>
