@@ -28,8 +28,9 @@ export type Post = {
     text: string;
   };
 export interface UserInfoProps {
-    userid?: string; // or the specific type for userid
-    currentUserId?: string; // or the specific type for currentUserId
+    userid?: string; 
+    currentUserId?: string; 
+    showUserInfo: boolean
   };
 export interface NavbarProps {
     setEventTrigger?: (value: boolean) => void;

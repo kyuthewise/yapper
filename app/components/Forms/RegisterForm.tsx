@@ -61,8 +61,8 @@ catch{
     }
    
     return (
-        <div className="grid place-items-center h-screen bg-gradient-to-r from-zinc-800 to-zinc-900">
-            <div className="scale-75 bg-gradient-to-r from-zinc-300 to-zinc-400 bg-opacity-90 p-12 w-2/6 rounded-3xl shadow-2xl border border-gray-100 transform transition duration-500 hover:scale-90">
+        <div className="flex justify-center items-center h-screen bg-gradient-to-r from-zinc-800 to-zinc-900">
+            <div className="bg-gradient-to-r from-zinc-300 to-zinc-400 bg-opacity-90 p-6 md:p-12 w-full md:w-2/3 lg:w-/3 xl:w-2/6 lg:scale-75 rounded-3xl shadow-2xl border border-gray-100 transform transition duration-500 hover:scale-90">
                 <div className="text-center mb-12">
                     <Image
                         src="/icons/logopurplenth.svg"

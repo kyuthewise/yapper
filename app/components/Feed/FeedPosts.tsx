@@ -11,9 +11,10 @@ import { format, parseISO } from 'date-fns';
 import Popup from "./popup";
 import DarkModeToggle from "./darkMode";
 import { Post,Userface,Comment,GetPostsProps } from "@/app/types/types";
+import FriendList from "../UserInfo/FriendList";
 
 
-const GetPosts:React.FC<GetPostsProps> = ({ sharedData, selectedUser, setEventTrigger, eventTrigger}) => {
+const GetPosts = ({ sharedData, selectedUser, setEventTrigger, eventTrigger, showFriendList}) => {
 
   const router = useRouter();
   const [postList, setPostList] = useState<Post[]>([]);
@@ -211,13 +212,13 @@ const showPopup = (message:string) => {
 const hidePopup = () => {
   setPopup({ show: false, message: '' });
 };
-
+console.log(showFriendList)
 
 
   return (
-    <div className="bg-gray-300 p-4 dark:bg-gray-800 dark:text-slate-300">
-      <Popup message={popup.message} show={popup.show} onClose={hidePopup} />
-      <ul className="space-y-8 ">
+    <div className={`${showFriendList === true ? `hidden` : `mt-20 lg:mt-0 p-2 md:p-4 lg:p-6 bg-gray-300 dark:bg-gray-800 dark:text-slate-300`} `}>
+    <Popup message={popup.message} show={popup.show} onClose={hidePopup} />
+    <ul className="space-y-3 md:space-y-4 lg:space-y-6">
         {postList.slice().reverse().map((post) => {
           const postState = postStates[post._id] || { comment: '', commentHidden: true };
           if (showAllPosts || (selectedUser && selectedUser === post.user)) {
@@ -226,7 +227,7 @@ const hidePopup = () => {
                 {userList.map((user) => {
                   if (user.name === post.user) {
                     return (
-                      <div className="p-5" key={post._id}>
+                      <div className="p-5 " key={post._id}>
                         <div className="flex items-center justify-between mb-4">
                           <div className="flex items-center">
                             <img
@@ -251,7 +252,7 @@ const hidePopup = () => {
                         <img 
                           src={post.filename}
                           alt="Post"
-                          className="w-full h-160 object-cover rounded-lg shadow"
+                          className="w-full h-96 xl:h-160 object-cover rounded-lg shadow"
   
                         />
                       </div>

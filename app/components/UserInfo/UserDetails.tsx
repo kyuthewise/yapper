@@ -1,10 +1,13 @@
 "use client";
 
 
-import { useSession } from "next-auth/react";
+import { useSession, signOut } from "next-auth/react";
 import { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import { PencilIcon, CameraIcon } from '@heroicons/react/outline'; // Importing icons
+import DarkModeToggle from "../Feed/darkMode";
+import { SearchIcon, UserAddIcon, LogoutIcon } from '@heroicons/react/outline';
+
 export default function Comp({userid, currentUserId}){
   {
     
@@ -113,7 +116,7 @@ console.log('dm details', darkMode)
  
         
       return (
-        <div className="bg-gray-50 rounded-lg w-full max-w-sm p-5 flex flex-col items-center shadow-lg dark:bg-gray-900 dark:text-slate-300 h-96 mt-10">
+        <div className="bg-gray-50 rounded-lg w-full max-w-sm p-5 mt-20 lg:mt-10 2xl:block flex flex-col items-center shadow-lg dark:bg-gray-900 dark:text-slate-300 h-96">
           
           <div className="flex flex-col items-center">
             
@@ -142,7 +145,7 @@ console.log('dm details', darkMode)
             )}
           </div>
     
-          <div className="text-2xl font-semibold mb-4">{userid}</div>
+          <div className="text-2xl font-semibold mb-4 text-center">{userid}</div>
               
           <div className="h-full w-full ">
             {isEditMode ? (
@@ -202,7 +205,18 @@ console.log('dm details', darkMode)
               </div>
             )}
           </div>
+          <div className="xl:hidden mt-48">
+          <DarkModeToggle/>
+          <button 
+          
+        onClick={() => signOut()}
+        className="mt-10 py-2 px-3 text-gray-800 bg-transparent hover:bg-gray-200 rounded transition-colors duration-300 flex items-center dark:text-slate-300"
+      >
+        <LogoutIcon className="h-5 w-5 mr-2" />Sign Out
+      </button>
+      </div>
         </div>
+        
       );
     
         }

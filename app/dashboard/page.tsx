@@ -36,7 +36,7 @@ export default function Dashboard(){
         visible={true}
         />
      </div> )}
-<div className={`${loading ? 'hidden' : 'flex h-full bg-gray-300 dark:bg-gray-800 flex-col mt-20 items-center'}`}>
+<div className={`${loading ? 'hidden' : 'flex h-screen bg-gray-300 dark:bg-gray-800 flex-col xl:mt-20 items-center'}`}>
 
 
 <MainContent setEventTrigger={setEventTrigger} eventTrigger={eventTrigger}></MainContent>

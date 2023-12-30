@@ -78,7 +78,7 @@ console.log('search results', searchResults)
   };
 
   return (
-<nav className="bg-white shadow-lg fixed top-0 w-full z-40 dark:text-slate-300 dark:bg-gray-900">
+<nav className=" bg-white shadow-lg fixed top-0 z-30 dark:text-slate-300 dark:bg-gray-900 w-full">
   <div className="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center">
     {/* Logo and Home Link */}
     <div className="flex items-center space-x-6"> {/* Increased space */}
@@ -95,7 +95,7 @@ console.log('search results', searchResults)
     </div>
 
     {/* Search Bar */}
-    <div className="relative flex-grow mx-4">
+    <div className="lg:relative flex-grow mx-4 ">
       <div className="flex items-center rounded-full bg-gray-100 px-5 py-3 dark:bg-gray-700"> {/* Increased padding */}
         <SearchIcon className="h-5 w-5 text-gray-500 mr-3" /> {/* Added margin */}
         <input 
@@ -108,7 +108,7 @@ console.log('search results', searchResults)
       </div>
       {/* Dropdown Menu */}
       {searchResults && searchResults.length > 0 && (
-        <div className="absolute top-full left-0 right-0 bg-white dark:bg-gray-700 p-3 shadow-md mt-1 rounded z-10">
+        <div className="mt-10 absolute left-0 lg:top-full  right-0 bg-white dark:bg-gray-700 p-3 shadow-md mt-1 rounded z-10">
           {searchResults.map((user) => (
             <div key={user._id} className="p-3 hover:bg-gray-100 rounded-lg dark:hover:bg-gray-500 flex justify-between items-center space-x-3"> {/* Increased padding and space */}
               <span>{user.name}</span>
@@ -130,7 +130,7 @@ console.log('search results', searchResults)
     </div>
 
     {/* Sign Out Button */}
-    <div className="flex items-center space-x-4"> {/* Added spacing */}
+    <div className="flex items-center space-x-4 hidden lg:inline-flex"> {/* Added spacing */}
       <button 
         onClick={() => signOut()}
         className="py-2 px-3 text-gray-800 bg-transparent hover:bg-gray-200 rounded transition-colors duration-300 flex items-center dark:text-slate-300"
