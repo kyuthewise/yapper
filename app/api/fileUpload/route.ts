@@ -1,11 +1,9 @@
 import { NextResponse } from "next/server";
-import path from "path";
-import { writeFile } from "fs/promises";
+
 import User
  from "@/app/models/user";
-import { query } from "firebase/database";
 import { Storage } from '@google-cloud/storage';
-import mongoose from 'mongoose';
+
 import { connectMongoDB } from "@/app/lib/server";
 export const POST = async (req, res) => {
 
