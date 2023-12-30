@@ -35,6 +35,8 @@ export interface UserInfoProps {
 export interface NavbarProps {
     setEventTrigger?: (value: boolean) => void;
     eventTrigger?: boolean;
+    disableInterface?: boolean;
+    setDisableInterface?: (value: boolean) => void;
   }
   
 export interface GetPostsProps {

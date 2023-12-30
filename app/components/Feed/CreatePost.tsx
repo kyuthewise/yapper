@@ -48,7 +48,7 @@ return (
   <div className={`${showCreatePost ? 'md:flex' : 'hidden'} lg:w-full fixed lg:flex inset-0 z-10 bg-white rounded-xl dark:bg-gray-900 md:relative md:inset-auto lg:w-full space-y-3 md:space-y-4 lg:space-y-6 md:mx-auto md:mt-4 md:h-auto`}>
     <form onSubmit={handleSubmit} className="w-full h-full  md:h-auto  flex flex-col justify-center items-center p-4">
       <textarea
-        className="resize-none w-full h-1/3 md:h-1/4 p-3 border-0 lg:h-32 rounded-md dark:text-slate-300 dark:bg-gray-800 focus:border focus:outline-none focus:border-indigo-500  "
+        className="resize-none w-full h-1/3 md:h-1/4 p-3 border-indigo-500 border lg:h-32 rounded-md dark:text-slate-300 dark:bg-gray-800 focus:border dark:border-indigo-600 focus:outline-none focus:border-indigo-400  "
         placeholder="Share your thoughts..."
         onChange={(e) => setMessage(e.target.value)}
         value={message}

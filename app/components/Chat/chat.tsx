@@ -119,20 +119,20 @@ const handleCloseChat = () =>{
 const imgurl = `/uploads/`
 
 return openChat ? (
-  <div className="fixed bottom-0 right-0 mb-4 mr-4 w-96 bg-white rounded-lg shadow-lg flex flex-col dark:bg-slate-700">
+  <div className="fixed z-10 bg-white lg:inset dark:bg-slate-700 lg:w-96 lg:bottom-0 lg:mb-4 lg:mr-4 rounded-lg shadow-lg flex flex-col">
     <div className="flex items-center justify-between p-3 border-b border-gray-200 dark:border-gray-600">
       <div className="flex items-center">
-        <img className="w-10 h-10 object-cover rounded-full mr-3" src={userPfp ? userPfp : `/uploads/defaultimg.svg`}  alt={selectedUser} />
+        <img className="w-10 h-10 object-cover rounded-full mr-3" src={userPfp ? userPfp : `/uploads/defaultimg.svg`} alt={selectedUser} />
         <p className="text-lg font-medium dark:text-slate-300">{selectedUser}</p>
       </div>
-      <button className="text-gray-600 hover:text-gray-800 dark:text-slate-300 dark:hover:text-white" onClick={handleCloseChat}>&times;</button>
+      <button className="text-gray-600 hover:text-gray-800 dark:text-slate-300 dark:hover:text-white" onClick={() => setSelectedUser('')}>&times;</button>
     </div>
 
-    <div className="h-72 overflow-y-auto p-3 dark:text-slate-300">
+    <div className="flex-grow lg:inline overflow-y-auto lg:h-72 p-3 dark:text-slate-300" ref={messagesContainerRef}>
       <ul>
         {messages.map((message) => (
-          <li key={message._id ? message._id : userid} className={`${message.userid === userid ? 'text-right' : 'text-left'} mb-2`}>
-            <div className={`${message.userid === userid ? 'bg-indigo-100 dark:bg-gray-800' : 'bg-gray-100 dark:bg-zinc-800'} inline-block p-2 rounded-lg max-w-xs `}>
+          <li key={message._id ? message._id : 'temp-key'} className={`${message.userid === userid ? 'text-right' : 'text-left'} mb-2`}>
+            <div className={`${message.userid === userid ? 'bg-indigo-100 dark:bg-gray-800' : 'bg-gray-100 dark:bg-zinc-800'} inline-block p-2 rounded-lg max-w-xs`}>
               <p className="text-sm">{message.message}</p>
             </div>
           </li>
@@ -149,7 +149,9 @@ return openChat ? (
           value={message}
           onChange={(e) => setMessage(e.target.value)}
         />
-        <button type="submit" className="bg-indigo-500 text-white px-4 rounded-r-lg hover:bg-indigo-600 dark:hover:bg-indigo-700">Send</button>
+        <button type="submit" className="bg-indigo-500 text-white px-4 rounded-r-lg hover:bg-indigo-600 dark:hover:bg-indigo-700">
+          Send
+        </button>
       </form>
     </div>
   </div>

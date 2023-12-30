@@ -71,7 +71,7 @@ const handleClick = async () =>{
 
 }
 return (
-  <div className={`xl:w-auto mt-20 lg:mt-0 w-screen h-screen lg:block  ${showFriendList ? `block` : `hidden`} `}>
+  <div className={`xl:w-auto mt-20 lg:mt-0 w-screen h-screen lg:block flex justify-center lg:inline lg:justify-none  ${showFriendList ? `block` : `hidden`} `}>
     <div className={`h-full w-full p-12 bg-gray-50 xl:w-80 xl:p-2 xl:mt-10 xl:h-5/6 xl:mb-10 xl:inline-flex xl:mr-10 rounded-lg shadow-xl flex flex-col items-center justify-center fixed right-0 dark:bg-gray-900 dark:text-slate-300`}>
       <h2 className="text-xl font-semibold my-4">Friendlist</h2>
       <ul className="h-full w-full flex flex-col inline overflow-y-auto">

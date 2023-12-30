@@ -8,7 +8,7 @@ import { SearchIcon, UserAddIcon, LogoutIcon } from '@heroicons/react/outline'; 
 import { Userface} from "@/app/types/types";
 import { NavbarProps } from "@/app/types/types";
 
-const Navbar:React.FC<NavbarProps> = ({setEventTrigger, eventTrigger}) => {
+const Navbar:React.FC<NavbarProps> = ({setEventTrigger, eventTrigger, disableInterface, setDisableInterface}) => {
   const { data: session } = useSession();
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState<Userface[]>([]);
@@ -76,7 +76,12 @@ console.log('search results', searchResults)
 
     }
   };
-
+  const handleClick = () => {
+    if(setDisableInterface){
+    setDisableInterface(true);
+    }
+    // Any other actions you want to perform
+  }
   return (
 <nav className=" bg-white shadow-lg fixed top-0 z-30 dark:text-slate-300 dark:bg-gray-900 w-full">
   <div className="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center">
@@ -87,7 +92,7 @@ console.log('search results', searchResults)
           <img className="h-20 w-20 brightness-75 drop-shadow-lg dark:contrast-125" src="/icons/logopurplenth.svg" />
         </p>
       </Link>
-      <Link href="/dashboard">
+      <Link href="/dashboard" onClick={handleClick}>
         <p className="text-gray-700 text-md hover:text-gray-500 cursor-pointer dark:text-slate-300">
           Home
         </p>

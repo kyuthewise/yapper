@@ -38,7 +38,7 @@ export default function Profile(){
  <div className="">
      <UserInfo userid={userid} currentUserId={currentUserId}/>
      </div>
-     <div className="w-2/6 mt-10">
+     <div className="lg:w-2/6 w-fullmt-10">
         <GetPosts selectedUser={userid} sharedData={""} setEventTrigger={function (value: boolean): void {
                         throw new Error("Function not implemented.");
                     } } eventTrigger={false} />
