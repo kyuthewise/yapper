@@ -91,7 +91,6 @@ try{
   
         setPostList(response.data.items);
     
-     
       } catch (error) {
         console.log('error fetching postlist', error);
       }
@@ -108,13 +107,10 @@ try{
   useEffect(() => {
     const initialStates = {};
     postList.forEach((post) => {
-      // Check if any of the comments in the post belong to the current user
-      const hasUserComment = post.comments.some(comment => comment.user === username);
-      // If the user has commented, initially show the comments
-      initialStates[post._id] = { comment: '', commentHidden: !hasUserComment };
+      initialStates[post._id] = { comment: '', commentHidden: true };
     });
     setPostStates(initialStates);
-  }, [postList, userid, likeTrigger, eventTrigger]);
+  }, [postList]);
 
   
 
@@ -216,6 +212,7 @@ const handleCommentChange = (postId:string, value:string) => {
 };
 const toggleCommentVisibility = (postId:string) => {
   setPostStates(prev => ({ ...prev, [postId]: { ...prev[postId], commentHidden: !prev[postId].commentHidden } }));
+
 };
 
 const formatDate = (dateString:string) => {
@@ -227,6 +224,7 @@ const showPopup = (message:string) => {
   setPopup({ show: true, message });
 };
 
+console.log(showUserComment)
 // Function to hide pop-up
 const hidePopup = () => {
   setPopup({ show: false, message: '' });
@@ -303,7 +301,7 @@ console.log(postList)
 
                           <ul className={`list-none p-0 `}>
                             {post.comments.slice().reverse().map((comment) => (
-                              <li key={comment._id} className={`flex items-center mb-1 ${(postState.commentHidden  || !showUserComment) ? 'hidden' : ''}`}>
+                              <li key={comment._id} className={`flex items-center mb-1 ${postState.commentHidden ? 'hidden' : ''}`}>
                                 <Link href={`/profile?userid=${comment.user}`}>
                                 <div className="flex justify-center items-center">
 
