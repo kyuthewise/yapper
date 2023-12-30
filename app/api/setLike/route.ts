@@ -1,8 +1,7 @@
 import { NextResponse } from "next/server"
-import User from "@/app/models/user"
 import { connectMongoDB } from "@/app/lib/server"
 import Post from "@/app/models/post";
-import { ObjectId } from 'mongodb';
+
 
 export async function POST (req, res) {
    
