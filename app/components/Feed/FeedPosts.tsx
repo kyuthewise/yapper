@@ -72,6 +72,12 @@ try{
     fetchData();
   }, [userid, sharedData]);
 
+  useEffect(() =>{
+    if(selectedUser){
+      setShowAllPosts(false)
+    }
+  }, [selectedUser])
+
 console.log('etF', eventTrigger)
   useEffect(() => {
 
@@ -93,7 +99,8 @@ console.log('etF', eventTrigger)
 
   }
     }
-      
+      52
+
     fetchData();
   }, [likeTrigger, sharedData, userid]);
 
@@ -213,7 +220,8 @@ const hidePopup = () => {
   setPopup({ show: false, message: '' });
 };
 console.log(showFriendList)
-
+console.log(selectedUser)
+console.log(showAllPosts)
 
   return (
     <div className={`${showFriendList === true ? `hidden` : `mt-20 lg:mt-0 p-2 md:p-4 lg:p-6 bg-gray-300 dark:bg-gray-800 dark:text-slate-300`} `}>

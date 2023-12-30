@@ -1,4 +1,5 @@
 import { UserIcon, UsersIcon } from '@heroicons/react/outline';
+import Link from 'next/link';
 
 const BottomNavbar = ({ toggleUserInfo, toggleFriendList}) => {
   return (
@@ -11,6 +12,7 @@ const BottomNavbar = ({ toggleUserInfo, toggleFriendList}) => {
         <UsersIcon className="h-6 w-6 text-gray-700 dark:text-gray-300" />
         <span className="text-xs text-gray-700 dark:text-gray-300">Friends</span>
       </button>
+      <Link href=""> </Link>
     </div>
   );
 };

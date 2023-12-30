@@ -43,7 +43,7 @@ export async function POST (req, res) {
           
               blobStream.on('finish', async () => {
                 const publicUrl = `https://storage.googleapis.com/${bucket.name}/${blob.name}`;
-                const newPost = await Post.create({ user, message, filename: publicUrl });
+                const newPost = await Post.create({ user:username, message, filename: publicUrl });
                 resolve(newPost);
               });
           
