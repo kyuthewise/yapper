@@ -49,9 +49,9 @@ export default function Comp({userid, currentUserId}){
           const userInfoResponse = await axios.get('/api/getUserInfo', { params: { userid } });
           const userImageResponse = await axios.get('/api/getUserImage', { params: { userid } });
           
-          if(userImageResponse.status === 200){
+      
           setProfileImage(userImageResponse.data.items); 
-        }
+        
           if(userid && currentUserId) {
           const responseFriendList = await axios.get('/api/getFriendlist', {
             params: {userid: currentUserId}
@@ -76,7 +76,7 @@ export default function Comp({userid, currentUserId}){
       };
       
       fetchUserData();
-    }, [renderTrigger, profileImage, friendTrigger]);
+    }, [renderTrigger, friendTrigger, profileImage]);
 
     console.log(userid,currentUserId)
 
