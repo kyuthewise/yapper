@@ -85,7 +85,7 @@ const CreatePost = ({ onDataChange, setEventTrigger, showCreatePost, setShowCrea
                     <img src={imagePreviewUrl as string} alt="Preview" className="w-12 h-12 object-cover rounded-lg"/>
                     <button 
                       onClick={handleRemoveImage} 
-                      className="absolute -top-2 -right-2 bg-white rounded-full p-1"
+                      className="absolute -top-2 -right-2 bg-white rounded-full p-1 dark:bg-gray-900 dark:text-gray-300 "
                     >
                       <XCircleIcon className="h-6 w-6 text-red-500" />
                     </button>

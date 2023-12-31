@@ -25,6 +25,7 @@ const [likeTrigger, setLikeTrigger] = useState(false);
 const [postStates, setPostStates] = useState({});
 const [popup, setPopup] = useState({ show: false, message: '' });
 const [showUserComment, setShowUserComment] = useState(false)
+const [currentUserFriends, setCurrentUserFriends] = useState<string[]>([])
 
  const userid = session?.user?.id as string
  const username = session?.user?.name as string
@@ -71,7 +72,7 @@ try{
     };
 
     fetchData();
-  }, [userid, sharedData]);
+  }, [userid, sharedData, eventTrigger]);
 
   useEffect(() =>{
     if(selectedUser){
@@ -224,13 +225,21 @@ const showPopup = (message:string) => {
   setPopup({ show: true, message });
 };
 
-console.log(showUserComment)
 // Function to hide pop-up
 const hidePopup = () => {
   setPopup({ show: false, message: '' });
 };
-console.log(postStates)
-console.log(postList)
+
+useEffect(()=> {
+  const handleFriendStatus = () => {
+
+  setCurrentUserFriends(userList.find(user => user._id === userid)?.friends || []);
+  }
+  handleFriendStatus()
+
+},[eventTrigger, userid, userList])
+
+
   return (
     <div className={`${showFriendList === true ? `hidden` : `mt-20 ${selectedUser ? `lg:mt-12` : 'lg:mt-0'} p-2 md:p-4 lg:p-6 bg-gray-300 dark:bg-gray-800 dark:text-slate-300`} `}>
     <Popup message={popup.message} show={popup.show} onClose={hidePopup} />
@@ -254,7 +263,8 @@ console.log(postList)
                             />
                             <span onClick={() => handlePostClick(post.user)} className="text-xl font-semibold cursor-pointer">{post.user}</span>
                           </div>
-                          {user.name !== username && (
+                          {
+                            ((user.name !== username && !currentUserFriends.includes(user.name)) ) &&(
                             <button className="text-indigo-500 hover:text-indigo-600" onClick={() => handleAddFriend(user.name)}><img className="h-6 w-6 dark:invert"src="/icons/addfriend.svg"/></button>
                           )}
                           {username === post.user && (

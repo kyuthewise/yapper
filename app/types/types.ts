@@ -9,10 +9,13 @@ export type Post = {
     message: string;
   };
   import { User as NextAuthUser } from "next-auth";
+
+
   export type Userface = {
     _id: string;
     name: string;
     image?: string;
+    friends?: string[]
   };
 
   export interface ExtendedUser {

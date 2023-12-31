@@ -8,6 +8,7 @@ import GetPosts from "../components/Feed/FeedPosts";
 import { useSearchParams } from "next/navigation";
 import { useSession } from "next-auth/react";
 import { useState, useEffect} from "react";
+import BottomNavbar from "../components/Layout/BottomNavbar";
 
 export default function Profile(){
     const [userid, setUserId] = useState('')

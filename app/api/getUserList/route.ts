@@ -11,7 +11,7 @@ export const GET = async(req) => {
     try {
       console.log('getuserlist: after try')
       await connectMongoDB()
-        const users = await User.find().select('name image')
+        const users = await User.find().select('name image friends')
         console.log('items pop')
         return NextResponse.json({
             items: users

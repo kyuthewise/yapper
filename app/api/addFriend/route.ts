@@ -24,11 +24,13 @@ if(userid != adduserid){
         return NextResponse.json({message: "User added successfuly"}, {status: 201})
 
     }
-    user.friends = user.friends.filter((id:string) => id != userid)
+    
+    user.friends = user.friends.filter((id:string) => id != adduserid)
+    await user.save()
     return NextResponse.json({message: "user unadded"}, {status: 201})
 
 }
-return NextResponse.json({message: "cannot add urself"}, {status: 201})
+return NextResponse.json({message: "cannot add urself"}, {status: 500})
 
     }
 
