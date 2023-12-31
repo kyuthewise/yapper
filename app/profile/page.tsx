@@ -30,6 +30,7 @@ export default function Profile(){
     
     console.log(userid, currentUserId)
     return (
+      (userid && 
        <div>
         <Navbar></Navbar>
        
@@ -48,5 +49,6 @@ export default function Profile(){
 
  </div>
  </div>
+ )
  )
 }

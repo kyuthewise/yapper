@@ -16,7 +16,7 @@ export async function GET(req, res) {
             if (!user) {
                 return NextResponse.json({message: "usr not found"}, {status: 404})
             }
-            return NextResponse.json({userInfo, darkmode})
+            return NextResponse.json({userInfo, darkmode}, {status:200})
 
         } catch (error) {
             return NextResponse.json({message: "Error updating user"}, {status: 500})

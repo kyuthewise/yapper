@@ -6,7 +6,7 @@ import { useSession } from "next-auth/react";
 import { UserInfoProps } from "@/app/types/types";
 
 
-const UserInfo:React.FC<UserInfoProps>= ({userid, currentUserId, showUserInfo}) => {
+const UserInfo:React.FC<UserInfoProps>= ({currentUserId, userid, showUserInfo}) => {
 const {data:session} = useSession()
 const currentUserid = userid || session?.user?.name;
   

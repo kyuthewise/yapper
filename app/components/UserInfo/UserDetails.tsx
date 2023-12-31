@@ -45,20 +45,14 @@ export default function Comp({userid, currentUserId}){
       if (!userid) return;
   
       const fetchUserData = async () => {
+        
         try {
           const userInfoResponse = await axios.get('/api/getUserInfo', { params: { userid } });
           const userImageResponse = await axios.get('/api/getUserImage', { params: { userid } });
           
       
-          setProfileImage(userImageResponse.data.items); 
-        
-          if(userid && currentUserId) {
-          const responseFriendList = await axios.get('/api/getFriendlist', {
-            params: {userid: currentUserId}
-        })
-        const friendList = responseFriendList.data.friends.map((friend => friend.name))
-        setUserFriendList(friendList)
-      }
+          
+   
           setUserInfo(userInfoResponse.data.userInfo || {
             Hobbies: '',
             Education: '',
@@ -68,15 +62,24 @@ export default function Comp({userid, currentUserId}){
           setDarkMode(userInfoResponse.data.darkmode)
          
          
+        
+          setProfileImage(userImageResponse.data.items); 
           
-         
+               
+          if(userid && currentUserId) {
+            const responseFriendList = await axios.get('/api/getFriendlist', {
+              params: {userid: currentUserId}
+          })
+          const friendList = responseFriendList.data.friends.map((friend => friend.name))
+          setUserFriendList(friendList)
+        }
         } catch (error) {
           console.error('Error fetching data:', error);
         }
       };
       
       fetchUserData();
-    }, [renderTrigger, friendTrigger, profileImage]);
+    }, [renderTrigger, friendTrigger, profileImage, currentId]);
 
     console.log(userid,currentUserId)
 

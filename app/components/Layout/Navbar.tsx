@@ -4,7 +4,7 @@ import { signOut, useSession } from "next-auth/react";
 import axios from "axios";
 import debounce from 'lodash.debounce';
 import DarkModeToggle from "../Feed/darkMode";
-import { SearchIcon, UserAddIcon, LogoutIcon } from '@heroicons/react/outline';
+import { SearchIcon, UserAddIcon, LogoutIcon, HomeIcon } from '@heroicons/react/outline';
 import { Userface } from "@/app/types/types";
 import { NavbarProps } from "@/app/types/types";
 
@@ -89,22 +89,15 @@ const Navbar: React.FC<NavbarProps> = ({ setEventTrigger, eventTrigger, disableI
   };
   return (
     <nav className="bg-white shadow-lg fixed top-0 z-30 dark:text-slate-300 dark:bg-gray-900 w-full">
-    <div className="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center">
-    {/* Logo and Home Link */}
-    <div className="flex items-center space-x-6"> {/* Increased space */}
-      <Link href="/dashboard">
-        <p className="text-gray-800 text-2xl font-bold hover:text-gray-600 cursor-pointer">
-          <img className="h-20 w-20 brightness-75 drop-shadow-lg dark:contrast-125" src="/icons/logopurplenth.svg" />
-        </p>
-      </Link>
-
-      <Link href="/dashboard" onClick={handleClick}>
-        <p className="text-gray-700 text-md hover:text-gray-500 cursor-pointer dark:text-slate-300 hidden lg:inline">
-          Home
-        </p>
-      </Link>
-     
-    </div>
+      <div className="max-w-6xl mx-auto px-4 py-3 flex items-center">
+        <div className="flex items-center space-x-6 mr-auto"> {/* Adjusted for left alignment */}
+          <Link href="/dashboard">
+            <p className="flex items-center justify-center">
+              <img className="h-20 w-20 brightness-75 drop-shadow-lg dark:contrast-125" src="/icons/logopurplenth.svg" alt="Logo" />
+            </p>
+          </Link>
+    
+        </div>
 
     {/* Search Bar */}
     <div className="lg:relative flex-grow mx-4" ref={searchBarRef}>
