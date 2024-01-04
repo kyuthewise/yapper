@@ -59,6 +59,21 @@ catch{
 
 }
     }
+
+    const handleDemoUser = async (e) =>{
+        e.preventDefault();
+    
+        try{
+            const res = await signIn('credentials', {
+                name:"notademouser", password:"12345"
+            })
+        }
+        catch(error){
+            console.log(error);
+    
+        }
+      }
+    
    
     return (
         <div className="flex justify-center items-center h-screen bg-gradient-to-r from-zinc-800 to-zinc-900">
@@ -108,6 +123,7 @@ catch{
                     <button className="w-full py-3 text-xl text-white bg-gradient-to-r from-indigo-700 to-purple-700 hover:from-indigo-800 hover:to-purple-800 rounded-lg transition duration-300 ease-in-out hover:scale-105 shadow-lg">
                         Register
                     </button>
+                    
                     <button
     onClick={() => signIn("google")}
     className="mt-4 w-full py-3 text-xl text-white bg-black hover:bg-red-900 rounded-lg transition duration-300 ease-in-out hover:scale-105 shadow-lg flex items-center justify-center gap-2"
@@ -115,11 +131,14 @@ catch{
     <img className="w-6 h-6" src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google logo" />
     <span>Continue with Google</span>
 </button>
+
                     {error && (
                         <div className="text-center text-red-500 mt-2 animate-pulse">
                             {error}
                         </div>
                     )}
+                    <button className="w-full py-3 text-xl text-white bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-800 hover:to-emerald-800 rounded-lg transition duration-300 ease-in-out hover:scale-105 shadow-lg"
+                     onClick={handleDemoUser}>Demo User</button>
                     <Link href="/">
                         <p className="text-lg mt-6 text-center text-gray-700 hover:text-indigo-800 block transition duration-300 ease-in-out hover:underline">
                             Already have an account? <span className="font-medium">Login</span>

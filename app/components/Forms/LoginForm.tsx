@@ -30,6 +30,20 @@ export default function LoginForm() {
     }
   };
 
+  const handleDemoUser = async (e) =>{
+    e.preventDefault();
+
+    try{
+        const res = await signIn('credentials', {
+            name:"notademouser", password:"12345"
+        })
+    }
+    catch(error){
+        console.log(error);
+
+    }
+  }
+
  
   return (
     <div className="flex justify-center items-center h-screen bg-gradient-to-r from-zinc-800 to-zinc-900">
@@ -70,7 +84,6 @@ export default function LoginForm() {
                     Login
                 </button>
           
-
             
                 <button
     onClick={() => signIn("google")}
@@ -86,6 +99,9 @@ export default function LoginForm() {
                         {error}
                     </div>
                 )}
+                 <button className="w-full py-3 text-xl text-white bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-800 hover:to-emerald-800 rounded-lg transition duration-300 ease-in-out hover:scale-105 shadow-lg"
+                     onClick={handleDemoUser}>Demo User</button>
+                     
                 <Link href="/register">
                     <p className="text-lg mt-6 text-center text-gray-700 hover:text-indigo-800 block transition duration-300 ease-in-out hover:underline">
                         Don't have an account? <p className="font-medium">Register</p>
