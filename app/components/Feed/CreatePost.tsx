@@ -66,7 +66,7 @@ const CreatePost = ({ onDataChange, setEventTrigger, showCreatePost, setShowCrea
       <div className={`${showCreatePost ? 'md:block' : 'hidden'} lg:w-full fixed lg:flex inset-0 z-10 bg-white dark:bg-gray-900 md:relative md:inset-auto lg:w-full md:mx-auto shadow-lg rounded-lg overflow-hidden`}>
         <form onSubmit={handleSubmit} className="w-full h-full md:h-auto flex flex-col justify-center items-center p-4 space-y-4">
           <textarea
-            className="resize-none w-full lg:w-160 h-40 md:h-48 p-4 border-2 border-gray-200 dark:border-gray-600 rounded-lg dark:text-slate-300 dark:bg-gray-800 focus:ring-2 focus:ring-indigo-500 focus:outline-none transition-all"
+            className="resize-none w-full h-40 md:h-48 p-4 border-2 border-gray-200 dark:border-gray-600 rounded-lg dark:text-slate-300 dark:bg-gray-800 focus:ring-2 focus:ring-indigo-500 focus:outline-none transition-all"
             placeholder="Share your thoughts..."
             onChange={(e) => setMessage(e.target.value)}
             value={message}
