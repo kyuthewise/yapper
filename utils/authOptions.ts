@@ -72,12 +72,13 @@ console.log("error: ", error)
                 }
                 return true; // Successful Google sign-in
             } else {
-                // Credentials Provider logic
+                if(credentials) {
                 const foundUser = await User.findOne({ name: credentials.name });
                 if (!foundUser) return false; // User not found
 
                 const passwordMatch = await bcrypt.compare(credentials.password, foundUser.password);
                 return passwordMatch; // Return true if password matches, false otherwise
+                }
             }
         }
         }, 
