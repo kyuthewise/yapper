@@ -2,7 +2,7 @@
 
 
 
-Yapper is tiny social media app which includes all the fundementals.
+Yapper is a tiny social media app that includes all the fundamental features.
 
 ## Features
 
