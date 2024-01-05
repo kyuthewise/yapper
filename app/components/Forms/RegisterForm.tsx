@@ -73,7 +73,17 @@ catch{
     
         }
       }
+
+      const handleGoogleSignIn = async (e) => {
+        e.preventDefault(); 
     
+        try {
+            await signIn('google');
+         
+        } catch (error) {
+            console.log('Google sign-in error:', error);
+        }
+    };
    
     return (
         <div className="flex justify-center items-center h-screen bg-gradient-to-r from-zinc-800 to-zinc-900">
@@ -125,7 +135,7 @@ catch{
                     </button>
                     
                     <button
-    onClick={() => signIn("google")}
+    onClick={handleGoogleSignIn}
     className="mt-4 w-full py-3 text-xl text-white bg-black hover:bg-red-900 rounded-lg transition duration-300 ease-in-out hover:scale-105 shadow-lg flex items-center justify-center gap-2"
 >
     <img className="w-6 h-6" src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google logo" />
