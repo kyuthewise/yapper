@@ -164,7 +164,7 @@ return (
     style={{ position: 'absolute', top: contextMenu.y, left: contextMenu.x }}
     className="context-menu bg-white shadow-md rounded px-4 py-2"
   >
-    <button onClick={() => handleRemoveFriend(contextMenu.selectedUser)}>Remove Friend</button>
+    <button onClick={() => handleRemoveFriend(contextMenu.selectedUser)}>Unfollow</button>
   </div>
 )}
   </div>
