@@ -7,7 +7,7 @@ const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'Yapper',
-  description: 'tiny social media c:!',
+  description: 'Tiny social media app!',
 }
 
 export default function RootLayout({
