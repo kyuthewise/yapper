@@ -20,7 +20,7 @@ export const authOptions: NextAuthOptions= {
                 try{
                     await connectMongoDB();
                     const user = await User.findOne({ name })
-                    console.log('usrses: ', user)
+        
                     if(!user){
                         return null;
                     }
@@ -50,18 +50,23 @@ console.log("error: ", error)
     },
     callbacks: {
         async signIn({ user, account, credentials }) {
+
+     
             await connectMongoDB(); // Ensure database connection
 
-            if(account && credentials){
+            if(account){
             if (account.provider === 'google') {
                 // Google Provider logic
                 let existingUser = await User.findOne({ email: user.email });
+
+             
 
                 if (!existingUser) {
                     existingUser = await User.create({
                         name: user.name,
                         email: user.email,
                         image: user.image, 
+                        
                         // Add other fields as necessary
                     });
                 }
@@ -76,9 +81,20 @@ console.log("error: ", error)
             }
         }
         }, 
-        async jwt({ token, user }) {
-            // When user signs in, add their MongoDB _id to the JWT token
-            if (user) {
+        async jwt({ token, user, account }) {
+
+           
+            if (account && user) {
+                console.log("user haha", user.name)
+                // For a new sign-in (either credentials or Google)
+                const foundUser = await User.findOne({ name: user.name});
+  
+                token.userId = foundUser._id;
+
+         
+            }
+            else if (user) {
+      
                 token.userId = (user as any)._id; 
                  // Add the MongoDB _id
             }
@@ -86,6 +102,7 @@ console.log("error: ", error)
         },
 
         async session({ session, token }) {
+            
             if (token.userId) {
                 // Extend the session user object
                 const extendedUser: ExtendedUser = {

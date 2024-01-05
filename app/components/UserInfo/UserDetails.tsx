@@ -81,7 +81,6 @@ export default function Comp({userid, currentUserId}){
       fetchUserData();
     }, [renderTrigger, friendTrigger, profileImage, currentId]);
 
-    console.log(userid,currentUserId)
 
 
 
