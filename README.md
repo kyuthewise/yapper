@@ -14,6 +14,12 @@ Yapper is a tiny social media app that includes all the fundamental features.
 
 ## Getting Started
 
+## Built With
+- **Next.js**
+- **Express**
+- **MongoDB, Google Cloud**
+- **Tailwind**
+
 To get started with Yapper, clone the repo and install the dependencies.
 
 ```bash
